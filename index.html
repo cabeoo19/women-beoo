@@ -1,0 +1,3493 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff8f3">
+  <meta name="description" content="Một bức thư nhỏ, một tình yêu thật to. Gửi riêng Đàm Quỳnh Anh.">
+  <title>Một chút thương, gửi Quỳnh Anh 💌</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap&subset=vietnamese"
+    rel="stylesheet">
+  <style>
+    /* ==========================================================
+       01. Bảng màu & Biến toàn cục — chỉnh ở đây để đổi không khí thiệp
+       ========================================================== */
+    :root {
+      --cream: #fff8f3;
+      --blush: #ffd6e0;
+      --lavender: #e8d5f2;
+      --peach: #ffe5d9;
+      --pink: #ff9eb5;
+      --rose: #ffb7c9;
+      --ink: #8a4f62;
+      --muted: #976f7d;
+      --paper: #fffdf9;
+      --pace: 1;
+      --sans: 'Nunito', 'Segoe UI', sans-serif;
+      --hand: 'Dancing Script', 'Segoe Print', cursive;
+      /* Kích thước cơ sở của 2 bạn cá camapp & cabeoo */
+      --fish-base-size: clamp(62px, 9.8vw, 98px);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      color: var(--ink);
+      font-family: var(--sans);
+      background: var(--cream);
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    button:focus-visible,
+    article:focus-visible {
+      outline: 3px solid #a55678;
+      outline-offset: 7px;
+    }
+
+    button:disabled {
+      cursor: default;
+    }
+
+    svg {
+      display: block;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      overflow: clip;
+      isolation: isolate;
+    }
+
+    article:focus-visible {
+      outline: 1px solid #d49aaf;
+      outline-offset: 4px;
+    }
+
+    /* Mesh chỉ trôi bằng transform; không animate blur hay màu nền để đạt 60fps */
+    .mesh {
+      position: absolute;
+      inset: -16%;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse at 15% 20%, var(--blush), transparent 48%),
+        radial-gradient(ellipse at 88% 28%, var(--lavender), transparent 45%),
+        radial-gradient(ellipse at 62% 90%, var(--peach), transparent 52%),
+        var(--cream);
+      opacity: .67;
+      animation: mesh-drift 26s ease-in-out infinite alternate;
+    }
+
+    .grain {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9;
+      opacity: .16;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.83' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%238a4f62' opacity='.18' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+    }
+
+    .halo {
+      position: absolute;
+      left: 50%;
+      top: 56%;
+      width: min(72vw, 760px);
+      aspect-ratio: 1;
+      border: 1px solid #ffffff70;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .halo::after {
+      content: '';
+      position: absolute;
+      inset: 36px;
+      border: 1px solid #ffffff58;
+      border-radius: inherit;
+    }
+
+    /* Thanh đầu trang: thương hiệu "một chút thương" & nút nhạc */
+    .topbar {
+      position: absolute;
+      z-index: 10;
+      top: max(25px, env(safe-area-inset-top));
+      left: max(34px, env(safe-area-inset-left));
+      right: max(34px, env(safe-area-inset-right));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      letter-spacing: .025em;
+      font-weight: 700;
+    }
+
+    .brand svg {
+      width: 27px;
+      height: 27px;
+    }
+
+    .music {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 44px;
+      padding: 0 17px;
+      border: 1px solid #ffffffb0;
+      border-radius: 30px;
+      background: #ffffff58;
+      box-shadow: 0 3px 20px #9b5d7610;
+      font-size: 12px;
+      font-weight: 700;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background .25s ease, transform .2s ease;
+    }
+
+    .music:hover {
+      background: #ffffffa0;
+      transform: translateY(-1px);
+    }
+
+    .music-bars {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 16px;
+    }
+
+    .music-bars i {
+      display: block;
+      width: 2px;
+      height: 5px;
+      border-radius: 4px;
+      background: var(--ink);
+      transform: scaleY(.5);
+    }
+
+    .music-bars i:nth-child(2) {
+      height: 15px;
+    }
+
+    .music-bars i:nth-child(3) {
+      height: 10px;
+    }
+
+    .music[aria-pressed="true"] i {
+      animation: equalizer 1s ease-in-out infinite alternate;
+    }
+
+    .music[aria-pressed="true"] i:nth-child(2) {
+      animation-delay: -.4s;
+    }
+
+    .music[aria-pressed="true"] i:nth-child(3) {
+      animation-delay: -.7s;
+    }
+
+    /* ==========================================================
+       02. Trạng thái đóng: tiêu đề, phong bì giấy và con dấu sáp tách đôi
+       ========================================================== */
+    .intro {
+      position: absolute;
+      z-index: 4;
+      top: 15.5%;
+      left: 20px;
+      right: 20px;
+      text-align: center;
+      transition: opacity calc(.55s * var(--pace)), transform calc(.8s * var(--pace));
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+
+    .intro h1 {
+      margin: 0;
+      font-family: var(--hand);
+      font-size: clamp(42px, 5.1vw, 68px);
+      font-weight: 600;
+      line-height: 1.17;
+    }
+
+    .intro h1 span {
+      display: block;
+    }
+
+    .intro .subtitle {
+      margin: 17px 0 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .tiny-heart {
+      display: inline-block;
+      margin-left: 3px;
+      color: #cf839a;
+    }
+
+    .envelope-stage {
+      position: absolute;
+      z-index: 4;
+      left: 50%;
+      top: 61.5%;
+      width: clamp(320px, 43vw, 438px);
+      transform: translate(-50%, -50%);
+      text-align: center;
+      transition: opacity calc(.5s * var(--pace));
+    }
+
+    .envelope-button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      perspective: 1100px;
+      border-radius: 12px;
+    }
+
+    .envelope-unit {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 1.57;
+      animation: envelope-float 5.5s ease-in-out infinite;
+      transform: rotate(-4deg);
+      transform-style: preserve-3d;
+    }
+
+    .envelope-back {
+      position: absolute;
+      inset: 0;
+      background: #edb6c6;
+      border: 1px solid #f1c0ce;
+      border-radius: 10px;
+      box-shadow: 0 25px 50px #98546f23, 0 5px 12px #98546f12;
+    }
+
+    .letter-slip {
+      position: absolute;
+      z-index: 1;
+      inset: 10% 9% 6%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--paper);
+      border: 1px solid #f4e5df;
+      border-radius: 6px;
+      box-shadow: 0 1px 8px #85586915;
+      font-family: var(--hand);
+      font-size: 27px;
+    }
+
+    .letter-slip::before {
+      content: '♡';
+      font-family: var(--sans);
+      font-size: 28px;
+      color: #dc95a9;
+    }
+
+    .pocket {
+      position: absolute;
+      z-index: 3;
+      inset: 0;
+      overflow: hidden;
+      border-radius: 9px;
+      background: linear-gradient(115deg, #fbd4de 2%, #f7c6d4 48%, #f4bbce);
+      clip-path: polygon(0 0, 50% 48%, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .pocket::before,
+    .pocket::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+
+    .pocket::before {
+      background: linear-gradient(35deg, #ffe0e8 10%, #f9cfdc);
+      clip-path: polygon(0 100%, 50% 46%, 100% 100%);
+    }
+
+    .pocket::after {
+      background: linear-gradient(145deg, #ffffff24, transparent 65%);
+      border: 1px solid #ffffff50;
+      border-radius: inherit;
+    }
+
+    .fold-lines {
+      position: absolute;
+      z-index: 4;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: .5;
+    }
+
+    .flap {
+      position: absolute;
+      z-index: 5;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 59%;
+      border-radius: 9px 9px 0 0;
+      background: linear-gradient(170deg, #ffe1e8 0%, #f9cad7 76%, #f1b8cc);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: 50% 0;
+      backface-visibility: visible;
+    }
+
+    .flap::after {
+      content: '';
+      position: absolute;
+      inset: 2px 2px 3px;
+      background: linear-gradient(160deg, #ffffff35, transparent);
+      clip-path: inherit;
+    }
+
+    .dedication {
+      position: absolute;
+      z-index: 4;
+      left: 12px;
+      right: 12px;
+      bottom: 15%;
+      font-family: var(--hand);
+      font-size: clamp(24px, 3vw, 32px);
+      transform: rotate(-1deg);
+    }
+
+    .envelope-note {
+      position: absolute;
+      z-index: 4;
+      left: 0;
+      right: 0;
+      bottom: 8%;
+      font-size: 8px;
+      letter-spacing: .18em;
+      color: #9b6678;
+    }
+
+    .seal {
+      position: absolute;
+      z-index: 6;
+      width: 65px;
+      height: 65px;
+      left: calc(50% - 32.5px);
+      top: 44%;
+    }
+
+    .seal-piece {
+      position: absolute;
+      inset: 0;
+      border: 2px solid #dc89a0;
+      border-radius: 46% 52% 44% 51%;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 35% 25%, #f8b3c3, #e495ad 65%, #cf7896);
+      box-shadow: inset 0 0 0 4px #efadc0, inset 0 0 0 5px #d88aa2, 0 4px 7px #a65b7640;
+    }
+
+    .seal-piece svg {
+      width: 30px;
+      height: 30px;
+      fill: #cb7794;
+      filter: drop-shadow(0 1px 0 #ffd4de);
+    }
+
+    .seal-left {
+      clip-path: polygon(-15% -15%, 53% -15%, 47% 23%, 56% 44%, 45% 64%, 53% 115%, -15% 115%);
+    }
+
+    .seal-right {
+      clip-path: polygon(53% -15%, 115% -15%, 115% 115%, 53% 115%, 45% 64%, 56% 44%, 47% 23%);
+    }
+
+    .open-hint {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 33px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .025em;
+      animation: hint-breathe 2.6s ease-in-out infinite;
+    }
+
+    .open-hint svg {
+      width: 20px;
+      height: 20px;
+      stroke: #b7758e;
+      fill: none;
+      stroke-width: 1.25;
+    }
+
+    .bottom-note {
+      position: absolute;
+      z-index: 4;
+      bottom: max(27px, env(safe-area-inset-bottom));
+      left: 20px;
+      right: 20px;
+      text-align: center;
+      font-size: 9px;
+      letter-spacing: .2em;
+      color: #9c7380;
+      transition: opacity .4s;
+    }
+
+    .is-opening .intro {
+      opacity: 0;
+      transform: translateY(-16px);
+      pointer-events: none;
+    }
+
+    .is-opening .envelope-unit {
+      animation: none;
+      transform: rotate(0);
+    }
+
+    .is-opening .seal {
+      animation: seal-shake calc(.38s * var(--pace)) both;
+    }
+
+    .is-opening .seal-left {
+      animation: seal-left calc(.42s * var(--pace)) calc(.25s * var(--pace)) both;
+    }
+
+    .is-opening .seal-right {
+      animation: seal-right calc(.42s * var(--pace)) calc(.25s * var(--pace)) both;
+    }
+
+    .is-opening .flap {
+      animation: flap-open calc(.8s * var(--pace)) calc(.42s * var(--pace)) both;
+    }
+
+    .is-opening .letter-slip {
+      animation: slip-up calc(.9s * var(--pace)) calc(.72s * var(--pace)) both;
+    }
+
+    .is-opening .open-hint,
+    .is-opening .bottom-note {
+      animation: none;
+      opacity: 0;
+    }
+
+    .is-open .envelope-stage {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ==========================================================
+       03. Giấy thư nằm trên hoa, khung chữ có thể cuộn độc lập
+       ========================================================== */
+    .letter-layer {
+      position: absolute;
+      z-index: 6;
+      inset: 82px 0 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .letter-paper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: min(580px, calc(100% - 60px));
+      max-height: 100%;
+      padding: clamp(28px, 4vw, 43px);
+      overflow: hidden;
+      border: 1px solid #fff;
+      border-radius: 15px;
+      background:
+        radial-gradient(#b58d7320 .55px, transparent .65px) 0 0 / 5px 5px,
+        linear-gradient(125deg, #fffefa, #fffaf7);
+      box-shadow: 0 22px 75px #90526c1a, 0 3px 15px #90526c0a;
+      opacity: 0;
+      transform: translateY(110px) scale(.65) rotate(-3deg);
+      user-select: text;
+    }
+
+    .letter-paper::before {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+      inset: 10px;
+      border: 1px solid #ead6d25e;
+      border-radius: 9px;
+    }
+
+    .letter-scroll {
+      position: relative;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: #e7bdcc transparent;
+      padding: 2px 7px 5px;
+    }
+
+    .letter-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .letter-scroll::-webkit-scrollbar-thumb {
+      background: #e7bdcc;
+      border-radius: 6px;
+    }
+
+    .letter-kicker {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 21px;
+    }
+
+    .letter-kicker p {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .2em;
+      margin: 0;
+    }
+
+    .letter-kicker svg {
+      flex: 0 0 33px;
+      width: 33px;
+      height: 37px;
+    }
+
+    .letter-paper h2 {
+      margin: 0 0 22px;
+      font: 600 clamp(35px, 4vw, 46px)/1.2 var(--hand);
+    }
+
+    .letter-lines {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.85;
+    }
+
+    .letter-line {
+      margin: 0 0 10px;
+      overflow-wrap: anywhere;
+      opacity: 0;
+      transform: translateY(9px);
+    }
+
+    .signature {
+      margin-top: 24px;
+      text-align: right;
+      opacity: 0;
+    }
+
+    .signature .signoff {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .signature strong {
+      display: block;
+      font: 600 30px/1.4 var(--hand);
+    }
+
+    .letter-footer {
+      margin-top: 25px;
+      padding-top: 17px;
+      border-top: 1px solid #ecd9dd;
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.8;
+      color: var(--muted);
+      opacity: 0;
+    }
+
+    .letter-footer .days {
+      margin: 0 0 6px;
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .letter-footer .forever {
+      margin: 0;
+      letter-spacing: .06em;
+    }
+
+    .replay {
+      flex-shrink: 0;
+      min-height: 44px;
+      padding: 0 20px;
+      border: 1px solid #fff9;
+      border-radius: 30px;
+      background: #fff8;
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 4px 15px #98546f09;
+      opacity: 0;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: background .25s ease, transform .2s ease;
+    }
+
+    .replay:hover {
+      background: #fff;
+      transform: translateY(-1px);
+    }
+
+    .is-open .letter-layer {
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .is-open .letter-paper {
+      animation: paper-arrive calc(.95s * var(--pace)) cubic-bezier(.16, 1, .3, 1) both;
+    }
+
+    .is-open .letter-line {
+      animation: line-reveal calc(.7s * var(--pace)) calc(var(--line-delay) * var(--pace)) ease-out both;
+    }
+
+    .is-open .signature,
+    .is-open .letter-footer {
+      animation: line-reveal calc(.8s * var(--pace)) calc(var(--line-delay) * var(--pace)) ease-out both;
+    }
+
+    .is-open .replay {
+      animation: line-reveal calc(.6s * var(--pace)) calc(.9s * var(--pace)) both;
+    }
+
+    /* ==========================================================
+       04. Hoa SVG, cánh hoa và tim: chỉ chuyển động bằng transform + opacity
+       ========================================================== */
+    .flower-field,
+    .ambient,
+    .particles,
+    .fish-world-layer,
+    .fish-fx-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .ambient {
+      z-index: 1;
+    }
+
+    .flower-field {
+      z-index: 3;
+    }
+
+    .fish-world-layer {
+      z-index: 7;
+    }
+
+    .particles,
+    .fish-fx-layer {
+      z-index: 8;
+    }
+
+    .flower {
+      position: absolute;
+      width: var(--size);
+      margin-left: calc(var(--size) / -2);
+      margin-top: calc(var(--size) / -2);
+      pointer-events: auto;
+    }
+
+    .flower-enter {
+      opacity: 0;
+      transform: rotate(var(--angle));
+    }
+
+    .flower-sway {
+      transform-origin: 50% 85%;
+      animation: flower-sway var(--sway, 7s) ease-in-out var(--offset, 0s) infinite alternate;
+    }
+
+    .flower svg {
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    .seedling .flower-enter {
+      opacity: .62;
+      transform: rotate(var(--angle)) scale(.8);
+      transition: opacity .6s;
+    }
+
+    .is-opening .seedling .flower-enter {
+      opacity: 0;
+    }
+
+    .is-open .seedling {
+      display: none;
+    }
+
+    .ambient-mote {
+      position: absolute;
+      color: #cb8fa7;
+      opacity: .4;
+      animation: ambient-float var(--duration) ease-in-out var(--offset) infinite alternate;
+    }
+
+    .ambient-mote svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .particle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: var(--size);
+      height: var(--size);
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .particle svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .toast {
+      position: absolute;
+      z-index: 12;
+      bottom: max(22px, env(safe-area-inset-bottom));
+      left: 50%;
+      width: max-content;
+      max-width: calc(100% - 32px);
+      padding: 11px 17px;
+      border: 1px solid #f6d4df;
+      border-radius: 20px;
+      background: #fffaf7;
+      box-shadow: 0 6px 25px #90526c12;
+      text-align: center;
+      font-size: 12px;
+      opacity: 0;
+      transform: translate(-50%, 12px);
+      pointer-events: none;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+      transition: transform .25s, opacity .25s;
+    }
+
+    /* ==========================================================
+       05. THẾ GIỚI 2 BẠN CÁ MINI, CHO CÁ ĂN & TIẾN HÓA ĐEO VƯƠNG MIỆN
+       ========================================================== */
+    .fish-actor {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: calc(var(--fish-base-size) * var(--fish-scale, 1));
+      height: calc(var(--fish-base-size) * var(--fish-scale, 1) * 0.82);
+      min-width: 52px;
+      min-height: 46px;
+      margin-left: calc(var(--fish-base-size) * var(--fish-scale, 1) / -2);
+      margin-top: calc(var(--fish-base-size) * var(--fish-scale, 1) * 0.82 / -2);
+      pointer-events: auto;
+      touch-action: none;
+      cursor: grab;
+      will-change: transform, opacity;
+      z-index: 7;
+      outline: none;
+      padding: 5px;
+      /* Biến lưu tỉ lệ tiến hóa (mặc định = 1, khi ăn đủ 5 mồi sẽ tăng lên ~1.22) */
+      --evolve-scale: 1;
+    }
+
+    .fish-actor:focus-visible {
+      outline: 2px dashed #c86d8e;
+      outline-offset: 4px;
+      border-radius: 50%;
+    }
+
+    .fish-actor.is-dragging {
+      cursor: grabbing;
+      z-index: 15;
+    }
+
+    .fish-scale-wrap {
+      width: 100%;
+      height: 100%;
+      will-change: transform;
+      transform: scale(var(--evolve-scale, 1));
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease;
+      filter: drop-shadow(0 7px 14px rgba(138, 79, 98, 0.16));
+    }
+
+    /* Khi cá đã tiến hóa sẽ có thêm hào quang vàng ấm áp nhẹ xung quanh */
+    .fish-actor.is-evolved .fish-scale-wrap {
+      filter:
+        drop-shadow(0 8px 16px rgba(138, 79, 98, 0.18)) drop-shadow(0 0 12px rgba(255, 215, 115, 0.45));
+    }
+
+    .fish-actor.is-dragging .fish-scale-wrap {
+      transform: scale(calc(var(--evolve-scale, 1) * 1.15));
+      filter: drop-shadow(0 18px 26px rgba(138, 79, 98, 0.28));
+    }
+
+    .fish-actor.just-popped .fish-scale-wrap {
+      animation: fish-pop-in 0.78s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .fish-actor.just-ate .fish-scale-wrap {
+      animation: fish-eat-bounce 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .fish-actor.just-evolved .fish-scale-wrap {
+      animation: fish-evolve-burst 0.95s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .fish-flip-wrap {
+      width: 100%;
+      height: 100%;
+      will-change: transform;
+      transition: transform 0.16s ease-out;
+    }
+
+    .fish-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      display: block;
+    }
+
+    .fish-tail-group {
+      transform-origin: 32px 45px;
+      will-change: transform;
+    }
+
+    .fish-fin-side {
+      transform-origin: 54px 52px;
+      will-change: transform;
+    }
+
+    /* Hiệu ứng chuyển đổi từ mũ/nơ thường sang Vương miện nhỏ lấp lánh khi ăn đủ 5 mồi */
+    .fish-base-accessory {
+      transform-box: fill-box;
+      transform-origin: center bottom;
+      transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .fish-actor.is-evolved .fish-base-accessory {
+      opacity: 0;
+      transform: translateY(6px) scale(0.25);
+    }
+
+    .fish-crown {
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center bottom;
+      transform: translateY(10px) scale(0.15) rotate(-12deg);
+      transition:
+        transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.35s ease;
+    }
+
+    .fish-actor.is-evolved .fish-crown {
+      opacity: 1;
+      transform: translateY(0) scale(1) rotate(0deg);
+    }
+
+    .crown-sparkle {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: crown-twinkle 1.5s ease-in-out infinite alternate;
+    }
+
+    .crown-sparkle.s2 {
+      animation-delay: -0.75s;
+    }
+
+    /* Biểu cảm mắt & miệng của camapp và cabeoo */
+    .fish-eye-normal {
+      opacity: 1;
+      transition: opacity 0.12s ease;
+    }
+
+    .fish-eye-blink,
+    .fish-eye-happy {
+      opacity: 0;
+      transition: opacity 0.12s ease;
+    }
+
+    .fish-mouth-normal {
+      opacity: 1;
+      transition: opacity 0.12s ease;
+    }
+
+    .fish-mouth-o {
+      opacity: 0;
+      transition: opacity 0.12s ease;
+    }
+
+    .fish-actor.blinking .fish-eye-normal {
+      opacity: 0;
+    }
+
+    .fish-actor.blinking .fish-eye-blink {
+      opacity: 1;
+    }
+
+    .fish-actor.is-dragging .fish-mouth-normal,
+    .fish-actor.surprised .fish-mouth-normal,
+    .fish-actor.mouth-open .fish-mouth-normal {
+      opacity: 0;
+    }
+
+    .fish-actor.is-dragging .fish-mouth-o,
+    .fish-actor.surprised .fish-mouth-o,
+    .fish-actor.mouth-open .fish-mouth-o {
+      opacity: 1;
+    }
+
+    .fish-actor.happy .fish-eye-normal {
+      opacity: 0;
+    }
+
+    .fish-actor.happy .fish-eye-happy {
+      opacity: 1;
+    }
+
+    .fish-actor.happy .fish-cheek {
+      transform: scale(1.25);
+      opacity: 0.95;
+    }
+
+    .fish-cheek {
+      transform-box: fill-box;
+      transform-origin: center;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    /* Bảng tên chữ viết tay trên đầu cá */
+    .fish-nametag {
+      position: absolute;
+      left: 50%;
+      top: -24px;
+      transform: translate3d(-50%, 4px, 0) scale(0.92);
+      padding: 1px 10px;
+      border-radius: 999px;
+      background: rgba(255, 253, 249, 0.86);
+      border: 1px solid rgba(235, 175, 195, 0.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      font-family: var(--hand);
+      font-size: clamp(0.88rem, 1.9vw, 1.05rem);
+      font-weight: 700;
+      color: var(--ink);
+      white-space: nowrap;
+      pointer-events: none;
+      box-shadow: 0 3px 10px rgba(138, 79, 98, 0.1);
+      opacity: 0;
+      transition: opacity 0.28s ease, transform 0.28s ease, border-color 0.3s ease;
+    }
+
+    .fish-actor.is-evolved .fish-nametag {
+      border-color: #ebd07a;
+      background: linear-gradient(135deg, rgba(255, 253, 244, 0.94), rgba(255, 244, 214, 0.92));
+      box-shadow: 0 4px 14px rgba(217, 167, 74, 0.22);
+    }
+
+    .fish-actor:hover .fish-nametag,
+    .fish-actor:focus-visible .fish-nametag,
+    .fish-actor.is-dragging .fish-nametag,
+    .fish-actor.show-tag .fish-nametag {
+      opacity: 0.96;
+      transform: translate3d(-50%, 0, 0) scale(1);
+    }
+
+    /* Mồi thức ăn thả xuống khi chạm đúp (Double-Tap / Double-Click) */
+    .fish-food {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 28px;
+      height: 28px;
+      margin-left: -14px;
+      margin-top: -14px;
+      pointer-events: none;
+      will-change: transform, opacity;
+      z-index: 7;
+      filter: drop-shadow(0 4px 8px rgba(138, 79, 98, 0.18));
+    }
+
+    .fish-food-inner {
+      width: 100%;
+      height: 100%;
+      animation: food-pop-in 0.36s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .fish-food.eaten .fish-food-inner {
+      animation: food-eaten-pop 0.28s ease-out forwards;
+    }
+
+    /* Vòng gợn sóng nước khi chạm đúp thả mồi */
+    .food-ripple {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 44px;
+      height: 44px;
+      margin-left: -22px;
+      margin-top: -22px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 158, 181, 0.72);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.55) 0%, transparent 70%);
+      pointer-events: none;
+      will-change: transform, opacity;
+      animation: ripple-expand 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Bong bóng, trái tim & chữ "Măm măm! 😋 (1/5)" bay lên từ cá */
+    .fish-bubble {
+      position: absolute;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      will-change: transform, opacity;
+      animation: fish-bubble-rise var(--dur, 2.2s) ease-out forwards;
+    }
+
+    .fish-yum-tag {
+      position: absolute;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      z-index: 16;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 800;
+      color: #c85276;
+      background: rgba(255, 253, 249, 0.92);
+      border: 1px solid #f4c2d1;
+      padding: 3px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(152, 84, 111, 0.15);
+      will-change: transform, opacity;
+      animation: yum-float 1.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Thông điệp dễ thương khi cá ăn đủ 5 mồi và tiến hóa đeo vương miện */
+    .fish-evolve-banner {
+      position: absolute;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      z-index: 17;
+      font-family: var(--sans);
+      font-size: clamp(12px, 2.5vw, 14px);
+      font-weight: 800;
+      color: #8a4f62;
+      background: linear-gradient(135deg, #fffdf7 0%, #fff4d6 50%, #ffe9f0 100%);
+      border: 1.5px solid #efd07b;
+      padding: 7px 16px;
+      border-radius: 999px;
+      white-space: nowrap;
+      max-width: calc(100vw - 24px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-shadow:
+        0 12px 30px rgba(180, 125, 50, 0.22),
+        0 0 0 3px rgba(255, 255, 255, 0.7);
+      will-change: transform, opacity;
+      animation: evolve-banner-float 3.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Biểu ngữ "camapp ❤ cabeoo" khi kéo 2 bạn cá chạm nhau */
+    .fish-love-banner {
+      position: absolute;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      z-index: 16;
+      font-family: var(--hand);
+      font-size: clamp(1.35rem, 3.6vw, 1.85rem);
+      font-weight: 700;
+      color: #d04b72;
+      background: rgba(255, 253, 249, 0.92);
+      border: 1.5px solid #f3b6c8;
+      padding: 5px 18px;
+      border-radius: 999px;
+      white-space: nowrap;
+      box-shadow: 0 10px 28px rgba(208, 75, 114, 0.2);
+      will-change: transform, opacity;
+      animation: love-banner-float 2.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Dòng gợi ý nhỏ thử kéo cá & chạm đúp cho cá ăn */
+    .fish-hint-toast {
+      position: absolute;
+      z-index: 11;
+      top: max(76px, calc(env(safe-area-inset-top) + 60px));
+      left: 50%;
+      transform: translate3d(-50%, -10px, 0);
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(255, 253, 249, 0.82);
+      border: 1px solid #f3cad6;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-size: clamp(11px, 2vw, 12.5px);
+      font-weight: 700;
+      color: var(--ink);
+      white-space: nowrap;
+      box-shadow: 0 6px 20px rgba(144, 82, 108, 0.1);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .fish-hint-toast.visible {
+      opacity: 0.94;
+      transform: translate3d(-50%, 0, 0);
+    }
+
+    /* ==========================================================
+       06. Keyframes chuyển động
+       ========================================================== */
+    @keyframes mesh-drift {
+      to {
+        transform: translate3d(4%, -3%, 0) rotate(5deg) scale(1.06);
+      }
+    }
+
+    @keyframes envelope-float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(-4deg);
+      }
+
+      50% {
+        transform: translateY(-9px) rotate(-2deg);
+      }
+    }
+
+    @keyframes hint-breathe {
+
+      0%,
+      100% {
+        opacity: .55;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes equalizer {
+      from {
+        transform: scaleY(.35);
+      }
+
+      to {
+        transform: scaleY(1);
+      }
+    }
+
+    @keyframes seal-shake {
+      25% {
+        transform: rotate(-9deg);
+      }
+
+      55% {
+        transform: rotate(8deg);
+      }
+
+      80% {
+        transform: rotate(-5deg);
+      }
+    }
+
+    @keyframes seal-left {
+      60% {
+        opacity: 1;
+      }
+
+      to {
+        transform: translate(-24px, 30px) rotate(-28deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes seal-right {
+      60% {
+        opacity: 1;
+      }
+
+      to {
+        transform: translate(24px, 23px) rotate(32deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes flap-open {
+      to {
+        transform: rotateX(180deg);
+      }
+    }
+
+    @keyframes slip-up {
+      60% {
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(-62%);
+        opacity: 0;
+      }
+    }
+
+    @keyframes paper-arrive {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0);
+      }
+    }
+
+    @keyframes line-reveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes flower-sway {
+      from {
+        transform: rotate(-3deg) scale(.98);
+      }
+
+      to {
+        transform: rotate(4deg) scale(1.025);
+      }
+    }
+
+    @keyframes ambient-float {
+      to {
+        transform: translate3d(10px, -22px, 0) rotate(18deg);
+        opacity: .65;
+      }
+    }
+
+    @keyframes fish-pop-in {
+      0% {
+        transform: scale(0.05);
+      }
+
+      65% {
+        transform: scale(1.18);
+      }
+
+      100% {
+        transform: scale(var(--evolve-scale, 1));
+      }
+    }
+
+    @keyframes fish-eat-bounce {
+      0% {
+        transform: scale(var(--evolve-scale, 1));
+      }
+
+      45% {
+        transform: scale(calc(var(--evolve-scale, 1) * 1.22));
+      }
+
+      100% {
+        transform: scale(var(--evolve-scale, 1));
+      }
+    }
+
+    @keyframes fish-evolve-burst {
+      0% {
+        transform: scale(1);
+      }
+
+      35% {
+        transform: scale(calc(var(--evolve-scale, 1.22) * 1.32));
+      }
+
+      70% {
+        transform: scale(calc(var(--evolve-scale, 1.22) * 0.94));
+      }
+
+      100% {
+        transform: scale(var(--evolve-scale, 1.22));
+      }
+    }
+
+    @keyframes crown-twinkle {
+      0% {
+        transform: scale(0.55) rotate(-15deg);
+        opacity: 0.45;
+      }
+
+      100% {
+        transform: scale(1.25) rotate(15deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes food-pop-in {
+      0% {
+        transform: scale(0.1) rotate(-30deg);
+        opacity: 0;
+      }
+
+      70% {
+        transform: scale(1.2) rotate(10deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes food-eaten-pop {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.45);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: scale(0.1);
+        opacity: 0;
+      }
+    }
+
+    @keyframes ripple-expand {
+      0% {
+        transform: translate3d(var(--x), var(--y), 0) scale(0.2);
+        opacity: 0.9;
+      }
+
+      100% {
+        transform: translate3d(var(--x), var(--y), 0) scale(1.9);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fish-bubble-rise {
+      0% {
+        transform: translate3d(var(--x), var(--y), 0) scale(0.3);
+        opacity: 0.9;
+      }
+
+      70% {
+        opacity: 0.85;
+      }
+
+      100% {
+        transform: translate3d(calc(var(--x) + var(--dx)), calc(var(--y) - var(--dy)), 0) scale(var(--s, 1));
+        opacity: 0;
+      }
+    }
+
+    @keyframes yum-float {
+      0% {
+        transform: translate3d(calc(var(--x) - 50%), var(--y), 0) scale(0.4);
+        opacity: 0;
+      }
+
+      25% {
+        transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 24px), 0) scale(1.06);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 54px), 0) scale(0.95);
+        opacity: 0;
+      }
+    }
+
+    @keyframes evolve-banner-float {
+      0% {
+        transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 8px), 0) scale(0.35);
+        opacity: 0;
+      }
+
+      16% {
+        transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 42px), 0) scale(1.06);
+        opacity: 1;
+      }
+
+      28% {
+        transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 46px), 0) scale(1);
+        opacity: 1;
+      }
+
+      84% {
+        transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 62px), 0) scale(1);
+        opacity: 0.96;
+      }
+
+      100% {
+        transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 88px), 0) scale(0.94);
+        opacity: 0;
+      }
+    }
+
+    @keyframes love-banner-float {
+      0% {
+        transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 10px), 0) scale(0.4);
+        opacity: 0;
+      }
+
+      20% {
+        transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 38px), 0) scale(1.08);
+        opacity: 1;
+      }
+
+      35% {
+        transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 44px), 0) scale(1);
+        opacity: 1;
+      }
+
+      80% {
+        opacity: 0.95;
+      }
+
+      100% {
+        transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 85px), 0) scale(0.95);
+        opacity: 0;
+      }
+    }
+
+    /* ==========================================================
+       07. Responsive: Tablet là bố cục gốc; nới cho desktop, thu gọn cho mobile
+       ========================================================== */
+    @media (min-width: 1100px) {
+      .letter-layer {
+        inset: 88px 0 35px;
+      }
+
+      .letter-paper {
+        padding: 34px 40px;
+        max-height: min(730px, calc(100dvh - 180px));
+      }
+
+      .envelope-stage {
+        top: 62%;
+      }
+    }
+
+    @media (min-width: 1800px) {
+      .intro {
+        top: 20%;
+      }
+
+      .envelope-stage {
+        width: 490px;
+      }
+    }
+
+    @media (max-width: 599px) {
+      .topbar {
+        top: max(15px, env(safe-area-inset-top));
+        left: max(20px, env(safe-area-inset-left));
+        right: max(20px, env(safe-area-inset-right));
+      }
+
+      .brand {
+        font-size: 11px;
+        gap: 7px;
+      }
+
+      .brand svg {
+        width: 23px;
+        height: 23px;
+      }
+
+      .music {
+        padding: 0 12px;
+        font-size: 11px;
+        gap: 7px;
+      }
+
+      .intro {
+        top: 18%;
+      }
+
+      .intro h1 {
+        font-size: clamp(40px, 10vw, 54px);
+      }
+
+      .eyebrow {
+        font-size: 8px;
+        letter-spacing: .2em;
+        margin-bottom: 15px;
+      }
+
+      .intro .subtitle {
+        font-size: 12px;
+        margin-top: 15px;
+      }
+
+      .envelope-stage {
+        width: min(78vw, 350px);
+        top: 61%;
+      }
+
+      .seal {
+        width: clamp(44px, 11vw, 54px);
+        height: clamp(44px, 11vw, 54px);
+        left: calc(50% - clamp(22px, 5.5vw, 27px));
+        top: 38%;
+      }
+
+      .seal-piece svg {
+        width: 25px;
+        height: 25px;
+      }
+
+      .dedication {
+        bottom: 13%;
+        font-size: clamp(24px, 6.3vw, 29px);
+      }
+
+      .envelope-note {
+        bottom: 6%;
+        font-size: 6px;
+      }
+
+      .open-hint {
+        margin-top: 28px;
+        font-size: 12px;
+      }
+
+      .halo {
+        width: 120vw;
+        top: 59%;
+      }
+
+      .halo::after {
+        inset: 27px;
+      }
+
+      .letter-layer {
+        inset: max(80px, calc(env(safe-area-inset-top) + 63px)) 0 max(18px, env(safe-area-inset-bottom));
+        gap: 11px;
+      }
+
+      .letter-paper {
+        width: calc(100% - 32px);
+        padding: 28px 23px 24px;
+        border-radius: 13px;
+      }
+
+      .letter-scroll {
+        padding: 2px 3px;
+      }
+
+      .letter-paper h2 {
+        font-size: clamp(32px, 8.5vw, 42px);
+        margin-bottom: 20px;
+      }
+
+      .letter-lines {
+        font-size: 16px;
+        line-height: 1.8;
+      }
+
+      .letter-line {
+        margin-bottom: 11px;
+      }
+
+      .letter-kicker p {
+        font-size: 8px;
+        letter-spacing: .15em;
+      }
+
+      .signature strong {
+        font-size: 28px;
+      }
+
+      .bottom-note {
+        font-size: 7px;
+        letter-spacing: .16em;
+        bottom: max(24px, env(safe-area-inset-bottom));
+      }
+
+      .fish-hint-toast {
+        top: max(64px, calc(env(safe-area-inset-top) + 52px));
+        font-size: 11px;
+        padding: 5px 13px;
+      }
+    }
+
+    @media (max-height: 670px) and (min-height: 461px) {
+      .intro {
+        top: 13%;
+      }
+
+      .intro h1 {
+        font-size: clamp(36px, 5vw, 49px);
+      }
+
+      .intro .subtitle {
+        margin-top: 10px;
+      }
+
+      .envelope-stage {
+        top: 63%;
+        width: min(78vw, 330px);
+      }
+
+      .open-hint {
+        margin-top: 20px;
+      }
+
+      .bottom-note {
+        bottom: 18px;
+      }
+    }
+
+    @media (max-height: 460px) and (orientation: landscape) {
+      .topbar {
+        top: max(10px, env(safe-area-inset-top));
+        left: max(20px, env(safe-area-inset-left));
+        right: max(20px, env(safe-area-inset-right));
+      }
+
+      .intro {
+        top: 34%;
+        left: 6%;
+        right: 51%;
+      }
+
+      .intro h1 {
+        font-size: clamp(31px, 4.8vw, 44px);
+      }
+
+      .eyebrow {
+        font-size: 7px;
+        margin-bottom: 10px;
+      }
+
+      .intro .subtitle {
+        font-size: 11px;
+      }
+
+      .envelope-stage {
+        left: 74%;
+        top: 51%;
+        width: min(34vw, 290px);
+      }
+
+      .open-hint {
+        margin-top: 17px;
+        font-size: 10px;
+        gap: 6px;
+      }
+
+      .open-hint svg {
+        height: 15px;
+      }
+
+      .dedication {
+        font-size: 23px;
+      }
+
+      .seal {
+        width: 47px;
+        height: 47px;
+        left: calc(50% - 23.5px);
+        top: 40%;
+      }
+
+      .bottom-note {
+        bottom: max(12px, env(safe-area-inset-bottom));
+        font-size: 7px;
+      }
+
+      .letter-layer {
+        inset: max(65px, calc(env(safe-area-inset-top) + 55px)) max(16px, env(safe-area-inset-right)) max(9px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+        gap: 5px;
+      }
+
+      .letter-paper {
+        width: min(570px, 82%);
+        padding: 23px 35px;
+      }
+
+      .letter-kicker {
+        margin-bottom: 12px;
+      }
+
+      .letter-paper h2 {
+        font-size: 35px;
+      }
+
+      .replay {
+        min-height: 44px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .flower-sway,
+      .mesh,
+      .envelope-unit,
+      .ambient-mote,
+      .open-hint,
+      .crown-sparkle {
+        animation: none !important;
+      }
+    }
+
+    .is-paused *,
+    .is-paused *::before,
+    .is-paused *::after {
+      animation-play-state: paused !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Bộ gradient dùng chung cho tất cả hoa tự vẽ, không có ảnh bên ngoài -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <defs id="flower-defs">
+      <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+        <stop stop-color="#c1d2ad" />
+        <stop offset="1" stop-color="#7e9f82" />
+      </linearGradient>
+      <radialGradient id="pollen">
+        <stop stop-color="#fff4c7" />
+        <stop offset=".65" stop-color="#efd28c" />
+        <stop offset="1" stop-color="#d9af6f" />
+      </radialGradient>
+    </defs>
+  </svg>
+
+  <main class="scene" id="scene">
+    <div class="mesh" aria-hidden="true"></div>
+    <div class="halo" aria-hidden="true"></div>
+    <div class="ambient" id="ambient" aria-hidden="true"></div>
+
+    <!-- Thanh đầu trang -->
+    <header class="topbar">
+      <div class="brand">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <g fill="#dca1b5">
+            <ellipse cx="16" cy="10" rx="4" ry="7" transform="rotate(-35 16 16)" />
+            <ellipse cx="16" cy="10" rx="4" ry="7" transform="rotate(55 16 16)" />
+            <ellipse cx="16" cy="10" rx="4" ry="7" transform="rotate(145 16 16)" />
+            <ellipse cx="16" cy="10" rx="4" ry="7" transform="rotate(235 16 16)" />
+          </g>
+          <circle cx="16" cy="16" r="3" fill="#ffe9bd" />
+        </svg>
+        <span>một chút thương</span>
+      </div>
+      <button type="button" class="music" id="music" aria-pressed="false" aria-label="Bật nhạc nền dịu dàng">
+        <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span id="music-label">Nhạc đang tắt</span>
+      </button>
+    </header>
+
+    <!-- Lời dẫn khi phong bì còn đóng -->
+    <div class="intro" id="intro">
+      <p class="eyebrow" id="recipient-label">GỬI RIÊNG ĐÀM QUỲNH ANH</p>
+      <h1>Có một điều<span>anh muốn gửi em.</span></h1>
+      <p class="subtitle">Một bức thư nhỏ. Cất cả bầu trời thương. <span class="tiny-heart" aria-hidden="true">♡</span>
+      </p>
+    </div>
+
+    <!-- Vườn hoa SVG -->
+    <div class="flower-field" id="flowers" aria-hidden="true"></div>
+
+    <!-- Phong bì thư ở giữa màn hình -->
+    <div class="envelope-stage" id="envelope-stage">
+      <button type="button" class="envelope-button" id="open-letter" aria-label="Chạm để mở thư tình gửi Đàm Quỳnh Anh"
+        aria-expanded="false" aria-controls="letter">
+        <span class="envelope-unit">
+          <span class="envelope-back"></span>
+          <span class="letter-slip" aria-hidden="true">Có anh, có em.<br>Có chúng mình.</span>
+          <span class="pocket"></span>
+          <svg class="fold-lines" viewBox="0 0 438 279" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M1 278 179 126M437 278 259 126" fill="none" stroke="#e7abbf" stroke-width="1" />
+            <path d="M2 277 178 127M436 277 260 127" fill="none" stroke="#ffeaf0" stroke-width="1" />
+          </svg>
+          <span class="flap"></span>
+          <span class="dedication" id="dedication">Gửi Quỳnh Anh 💌</span>
+          <span class="envelope-note">MỘT ĐIỀU DỊU DÀNG DÀNH RIÊNG CHO EM</span>
+          <span class="seal" aria-hidden="true">
+            <span class="seal-piece seal-left">
+              <svg viewBox="0 0 32 32">
+                <path d="M16 27 5 16C-4 6 10-1 16 8 22-1 36 6 27 16Z" />
+              </svg>
+            </span>
+            <span class="seal-piece seal-right">
+              <svg viewBox="0 0 32 32">
+                <path d="M16 27 5 16C-4 6 10-1 16 8 22-1 36 6 27 16Z" />
+              </svg>
+            </span>
+          </span>
+        </span>
+      </button>
+      <div class="open-hint" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 3v11m-4-4 4 4 4-4M6 17v3h12v-3" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span id="open-hint">Chạm để mở thư</span>
+      </div>
+    </div>
+
+    <!-- Lớp giấy thư -->
+    <section class="letter-layer" id="letter-layer" aria-hidden="true" inert>
+      <article class="letter-paper" id="letter" tabindex="-1" aria-labelledby="salutation">
+        <div class="letter-scroll" id="letter-scroll" tabindex="0" role="region"
+          aria-label="Nội dung thư, có thể cuộn để đọc tiếp">
+          <div class="letter-kicker">
+            <p>NHỮNG ĐIỀU ANH MUỐN NÓI</p>
+            <svg viewBox="0 0 40 45" aria-hidden="true">
+              <path d="M20 39q-5-18 2-28M20 32q-14-3-12-12 11 1 12 12M20 25q13-3 12-12-10 1-12 12" fill="#c4d0b0"
+                stroke="#93ab8b" stroke-width="1" />
+              <g fill="#efbacb">
+                <ellipse cx="21" cy="9" rx="5" ry="8" />
+                <ellipse cx="21" cy="9" rx="5" ry="8" transform="rotate(65 21 12)" />
+                <ellipse cx="21" cy="9" rx="5" ry="8" transform="rotate(-65 21 12)" />
+              </g>
+              <circle cx="21" cy="12" r="3" fill="#ffe4ad" />
+            </svg>
+          </div>
+          <h2 id="salutation">Gửi Đàm Quỳnh Anh,</h2>
+          <div class="letter-lines" id="letter-lines"></div>
+          <div class="signature" id="signature">
+            <span class="signoff">Thương em,</span>
+            <strong id="sender">Nguyễn Tuấn Dũng</strong>
+          </div>
+          <footer class="letter-footer" id="letter-footer">
+            <p class="days" id="days" hidden></p>
+            <p class="forever">Một chút thương hôm nay, và cả những ngày sau. ♡</p>
+          </footer>
+        </div>
+      </article>
+      <button type="button" class="replay" id="replay" aria-label="Mở lại thiệp và xem hiệu ứng hoa từ đầu">Mở lại
+        ✨</button>
+    </section>
+
+    <!-- Thế giới nhỏ của 2 bạn cá camapp & cabeoo + lớp mồi ăn / bong bóng -->
+    <div class="fish-world-layer" id="fish-world"></div>
+    <div class="fish-fx-layer" id="fish-fx" aria-hidden="true"></div>
+
+    <!-- Hạt cánh hoa / trái tim / lấp lánh -->
+    <div class="particles" id="particles" aria-hidden="true"></div>
+
+    <!-- Gợi ý nhỏ thử kéo cá & chạm đúp cho cá ăn -->
+    <div class="fish-hint-toast" id="fish-hint" aria-hidden="true">
+      Thử giữ kéo hai bạn cá, hoặc chạm đúp để thả mồi nhé 🐟✨
+    </div>
+
+    <p class="bottom-note">MỘT BỨC THƯ NHỎ &nbsp;·&nbsp; MỘT TÌNH YÊU THẬT TO</p>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="toast" id="toast" role="status"></div>
+    <span class="sr-only" id="status" role="status" aria-live="polite"></span>
+  </main>
+
+  <noscript>
+    <p
+      style="position:fixed;inset:35% 20px auto;z-index:20;padding:24px;background:#fffaf7;color:#8a4f62;text-align:center;border-radius:16px">
+      Hãy bật JavaScript để mở bức thư này nhé. ♡
+    </p>
+  </noscript>
+
+  <script>
+    /* ==========================================================
+       CONFIG — Dễ dàng chỉnh sửa lời thư, ngày kỷ niệm, tốc độ và 2 bạn cá
+       MUSIC_URL để trống: dùng giai điệu chuông nhẹ tạo ngay trên máy.
+       ========================================================== */
+    const CONFIG = {
+      RECIPIENT: "[Đàm Quỳnh Anh]",
+      SENDER: "[Nguyễn Tuấn Dũng]",
+      LETTER: `Hề lố xin chào người phụ nữ xinh đẹp, duyên dáng, rạng rỡ, quyến rũ, dễ thương, wise, compassionate, Lovely, Courageous, super gơn của tuii
+Tôi yêu iemmmm, tôi chân thành viết tấm thư này bang cả tấm long của tui chúc em 1 ngày 20/10 có tất cả mọi thứ và đặc biệt là có được troái tuym của tui😏😏😏
+Mặc dù người iu em hơi dốt văn, nhưng mọi tình cảm của tui cho em đều là thật lòng đóoooo
+Mong rang năm nào a cũm được tặng thật nhìu món quà cho cô gái xinh iu bé bỏng náo tét của anh
+Mỗi bông hoa này sẽ là 1 lời chúc ngọt ngào a rành cho iemm (a đã cố tìm hoa sữa nhma k có)
+Mong rằng, khi mở bức thư này, em sẽ mỉm cười một chút. hí hí hí
+Vì ở đây, có một người luôn thấy mình thật may mắn khi có em. há há há
+Dạo này a bận rụn quá, khum chơi dc nhìu với em, nhưng hi zong em hỉu cho anh nhá
+Anh vẫn sẽ lun lun đặt em lên hàng đầu, dành tgian quan tâm em nhìu nhất có thể nunn
+Và anh cũng sẽ cố gắng cím thật nhìu xìn để làm được đìu đó :> moazz
+Yêu em thật nhìu!`,
+      DEDICATION: "Gửi [TÊN NGƯỜI YÊU] 💌",
+      OPEN_HINT: "Chạm để mở thư",
+      MUSIC_URL: "./ILoveYou3000.mp3",                    // MP3 tùy chọn; để trống để dùng nhạc chuông Web Audio.
+      START_DATE: "2021-12-19",                    // YYYY-MM-DD, ví dụ "2025-02-14"; trống = ẩn.
+      ANIMATION_SPEED: 1,               // 1 = chuẩn; 1.4 = chậm hơn; 0.7 = nhanh hơn.
+      LINE_INTERVAL: 0.34,              // Khoảng cách xuất hiện giữa hai dòng, giây.
+      FLOWERS: { MOBILE: 22, TABLET: 32, DESKTOP: 44 },
+
+      // TÙY CHỌN THẾ GIỚI 2 BẠN CÁ MINI (CAMAPP & CABEOO) + CHO ĂN & TIẾN HÓA
+      FISH_ENABLED: true,
+      FISH_SETTINGS: {
+        baseSpeed: 68,                  // Tốc độ bơi chuẩn (px/giây)
+        foodChaseSpeedMultiplier: 1.65, // Tăng tốc khi thấy mồi ăn
+        playfulness: 1.0,               // Mức độ nghịch ngợm (0.6 -> 1.6)
+        dragLerp: 0.28,                 // Độ mượt bám tay khi kéo (0.15 -> 0.4)
+        throwFriction: 0.95,            // Quán tính trượt khi thả tay
+        avoidLetterPadding: 24,         // Khoảng cách đệm đẩy cá ra ngoài khung thư (px)
+        maxFoods: 6,                    // Số lượng viên mồi tối đa trên màn hình cùng lúc
+        evolveFoodCount: 5,             // Số viên mồi cần ăn để cá tiến hóa đeo vương miện
+        evolveScaleMultiplier: 1.22,    // Độ lớn tăng thêm khi tiến hóa (1.22 = lớn hơn 22%)
+        hintText: "Thử giữ kéo hai bạn cá, hoặc chạm đúp thả 5 viên mồi xem điều bất ngờ nhé 🐟✨",
+        loveBannerText: "camapp ❤ cabeoo",
+        yumTexts: ["Măm măm! 😋", "Ngon quá! ♡", "Thêm nữa đi! ✨", "Yummy! 💗"],
+        evolveMessages: {
+          camapp: "👑 camapp đã ăn đủ 5 miếng, hóa Hoàng Tử Cá Mập rồi! 💙✨",
+          cabeoo: "👑 cabeoo măm đủ 5 miếng, hóa Công Chúa Cá Béo xinh nhất! 💗✨",
+          both: "👑 camapp ❤ cabeoo — Cặp đôi Hoàng Gia dưới đáy biển! 💞"
+        }
+      },
+      FISH: [
+        {
+          id: "camapp",
+          name: "camapp",
+          variant: "boy",               // Ban đầu đội mũ thủy thủ beret -> Tiến hóa đeo Vương miện Sapphire
+          sizeScale: 1.06,
+          bodyLight: "#D6EEFF",
+          bodyMain: "#99C8FF",
+          bodyDeep: "#7B9FF2",
+          finColor: "#B8C0FF",
+          strokeColor: "#5E7CE2",
+          cheekColor: "#FF9EB5",
+          accessoryColor: "#FFFDF7"
+        },
+        {
+          id: "cabeoo",
+          name: "cabeoo",
+          variant: "girl",              // Ban đầu đeo nơ hồng ruy-băng -> Tiến hóa đeo Vương miện Trái tim
+          sizeScale: 0.98,
+          bodyLight: "#FFF0F3",
+          bodyMain: "#FFB3C6",
+          bodyDeep: "#FF85A1",
+          finColor: "#FFC6FF",
+          strokeColor: "#D86487",
+          cheekColor: "#FF6B8B",
+          accessoryColor: "#FF6F91"
+        }
+      ]
+    };
+
+    /* Thư mẫu chỉ dùng khi chưa thay ô LETTER; dán thư riêng sẽ thay toàn bộ. */
+    const SAMPLE_LETTER = [
+      "Giữa bao điều vội vã, em vẫn là khoảng dịu dàng nhất của anh.",
+      "Anh thích những câu chuyện nhỏ, những lần bật cười, và cả lúc hai đứa chẳng cần nói gì.",
+      "Có em, những ngày bình thường bỗng trở nên đáng nhớ.",
+      "Anh không hứa mọi ngày đều sẽ hoàn hảo, nhưng anh muốn cùng em đi qua tất cả.",
+      "Muốn lắng nghe em nhiều hơn, nắm tay em lâu hơn, và thương em bằng những điều thật nhỏ.",
+      "Mong rằng, khi mở bức thư này, em sẽ mỉm cười một chút.",
+      "Vì ở đây, có một người luôn thấy mình thật may mắn khi có em."
+    ].join("\n");
+
+    /* ==========================================================
+       05. Điền nội dung bằng textContent để an toàn khi sửa lời thư
+       ========================================================== */
+    const $ = id => document.getElementById(id);
+    const scene = $("scene"), openButton = $("open-letter"), field = $("flowers"), particleLayer = $("particles");
+    const fishWorldLayer = $("fish-world"), fishFxLayer = $("fish-fx"), fishHintToast = $("fish-hint");
+    const motionQuery = matchMedia("(prefers-reduced-motion: reduce)");
+    const clean = text => String(text).trim().replace(/^\[([^\]]+)\]$/, "$1");
+    const recipient = clean(CONFIG.RECIPIENT), sender = clean(CONFIG.SENDER);
+    const nickname = recipient.split(/\s+/).slice(-2).join(" ");
+    const speed = Math.min(3, Math.max(.4, Number(CONFIG.ANIMATION_SPEED) || 1));
+    const rand = (a, b) => a + Math.random() * (b - a);
+    const small = () => innerWidth < 600;
+    const reduced = () => motionQuery.matches;
+
+    document.documentElement.style.setProperty("--pace", speed);
+    document.title = `Một chút thương, gửi ${nickname} 💌`;
+    $("recipient-label").textContent = `GỬI RIÊNG ${recipient.toLocaleUpperCase("vi")}`;
+    $("dedication").textContent = CONFIG.DEDICATION.replaceAll("[TÊN NGƯỜI YÊU]", nickname);
+    $("open-hint").textContent = CONFIG.OPEN_HINT;
+    $("salutation").textContent = `Gửi ${recipient},`;
+    $("sender").textContent = sender;
+    if (CONFIG.FISH_SETTINGS && CONFIG.FISH_SETTINGS.hintText) {
+      fishHintToast.textContent = CONFIG.FISH_SETTINGS.hintText;
+    }
+    openButton.setAttribute("aria-label", `${CONFIG.OPEN_HINT}, gửi ${recipient}`);
+
+    const letterText = CONFIG.LETTER.trim() === "[DÁN NỘI DUNG THƯ VÀO ĐÂY]" ? SAMPLE_LETTER : CONFIG.LETTER;
+    const lines = letterText.trim().split(/\r?\n/).filter(line => line.trim());
+    const lineInterval = Math.max(.08, Number(CONFIG.LINE_INTERVAL) || .34);
+    lines.forEach((line, index) => {
+      const p = document.createElement("p");
+      p.className = "letter-line";
+      p.textContent = line.trim();
+      p.style.setProperty("--line-delay", `${.4 + index * lineInterval}s`);
+      $("letter-lines").append(p);
+    });
+    $("signature").style.setProperty("--line-delay", `${.65 + lines.length * lineInterval}s`);
+    $("letter-footer").style.setProperty("--line-delay", `${.9 + lines.length * lineInterval}s`);
+
+    function updateDays() {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(CONFIG.START_DATE)) return;
+      const [y, m, d] = CONFIG.START_DATE.split("-").map(Number);
+      const start = new Date(Date.UTC(y, m - 1, d));
+      if (start.getUTCFullYear() !== y || start.getUTCMonth() !== m - 1 || start.getUTCDate() !== d) return;
+      const now = new Date(), today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+      const elapsed = Math.floor((today - start.getTime()) / 86400000);
+      if (elapsed < 0) return;
+      $("days").hidden = false;
+      $("days").textContent = `Chúng ta đã bên nhau ${elapsed.toLocaleString("vi-VN")} ngày ♡`;
+    }
+    updateDays();
+
+    /* ==========================================================
+       06. Vườn hoa SVG: hồng, mẫu đơn, anh đào, cúc và tulip; 5 sắc độ
+       ========================================================== */
+    const palettes = [
+      ["#ffe9ee", "#f3adc2", "#da8fa9"],
+      ["#fff0e9", "#f5bcae", "#dc9e9c"],
+      ["#f6edff", "#d4b7e5", "#b99ace"],
+      ["#fffdf2", "#f6e3b4", "#e0c590"],
+      ["#fff3f5", "#f4c7d6", "#dca7bd"]
+    ];
+    $("flower-defs").insertAdjacentHTML("beforeend", palettes.map((p, i) => `
+      <radialGradient id="petal${i}" cx=".35" cy=".25" r=".85">
+        <stop stop-color="${p[0]}"/><stop offset=".65" stop-color="${p[1]}"/><stop offset="1" stop-color="${p[2]}"/>
+      </radialGradient>
+      <linearGradient id="inner${i}" x2=".8" y2="1">
+        <stop stop-color="${p[0]}"/><stop offset="1" stop-color="${p[1]}"/>
+      </linearGradient>
+    `).join(""));
+
+    const heartSVG = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21 3.5 12.8C-3.5 5.9 6-1 12 5.9 18-1 27.5 5.9 20.5 12.8Z"/></svg>';
+    const sparkleSVG = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1 15 9 23 12 15 15 12 23 9 15 1 12 9 9Z"/></svg>';
+    const petalSVG = '<svg viewBox="0 0 25 32"><path d="M12 30C-9 14 2-5 14 3 29-3 30 21 12 30Z" fill="currentColor"/><path d="M12 28Q18 15 14 5" fill="none" stroke="#fff" stroke-opacity=".4"/></svg>';
+
+    function flowerSVG(type, color) {
+      const fill = `url(#petal${color})`, inner = `url(#inner${color})`;
+      const ring = (count, petal, offset = 0) => Array.from({ length: count }, (_, i) => `<g transform="rotate(${i * 360 / count + offset})">${petal}</g>`).join("");
+      const stem = '<g fill="url(#leaf)" stroke="#91aa87" stroke-width="1.1"><path d="M1 5Q-8 48 6 108" fill="none" stroke-width="2"/><path d="M1 58Q-35 60-32 33 0 34 1 58Z"/><path d="M1 77Q37 69 32 48 9 47 1 77Z"/><path d="M-1 58-26 39M3 73 27 53" fill="none" stroke="#e3e9cc" stroke-width=".7"/></g>';
+      let bloom = "";
+      if (type === 0) {
+        bloom = ring(8, `<ellipse cx="0" cy="-19" rx="17" ry="26" fill="${fill}" stroke="#fff" stroke-opacity=".22" stroke-width=".8"/>`, 22);
+        bloom += ring(7, `<path d="M0 8C-30-2-24-32-5-28 15-35 26-9 0 8Z" fill="${inner}" stroke="${palettes[color][2]}" stroke-opacity=".25" stroke-width=".7"/>`, 7);
+        bloom += ring(5, `<ellipse cx="0" cy="-8" rx="9" ry="14" fill="${fill}"/>`, 15);
+        bloom += `<path d="M-9 2C-16-11 7-16 11-4 16 9-7 15-8 4-10-4 5-8 6-1" fill="none" stroke="${palettes[color][2]}" stroke-width="2" stroke-linecap="round" opacity=".65"/>`;
+      } else if (type === 1) {
+        bloom = ring(11, `<path d="M0 8C-15-1-26-22-17-34-10-42-5-34 0-39 7-43 12-35 17-32 28-20 14 1 0 8Z" fill="${fill}" stroke="#fff" stroke-opacity=".25" stroke-width=".8"/>`, 10);
+        bloom += ring(8, `<ellipse cx="0" cy="-14" rx="12" ry="22" fill="${inner}" stroke="${palettes[color][2]}" stroke-opacity=".25" stroke-width=".6"/>`, 25);
+        bloom += ring(6, `<ellipse cx="0" cy="-6" rx="7" ry="13" fill="${fill}"/>`);
+        bloom += '<circle r="4" fill="url(#pollen)"/>';
+      } else if (type === 2) {
+        const petal = `<path d="M0 5C-21-2-28-27-14-34-6-38-2-31 0-28 4-34 11-37 18-31 29-18 15 1 0 5Z" fill="${fill}" stroke="#fff" stroke-opacity=".4" stroke-width="1"/>`;
+        bloom = ring(5, petal, 10) + `<g transform="scale(.63) rotate(33)">${ring(5, petal)}</g>`;
+        bloom += ring(9, '<path d="M0 0 0-14" stroke="#d69d9b" stroke-width=".9"/><circle cx="0" cy="-14" r="1.6" fill="#d9b270"/>');
+        bloom += '<circle r="4" fill="url(#pollen)"/>';
+      } else if (type === 3) {
+        bloom = ring(13, `<ellipse cx="0" cy="-22" rx="7.3" ry="23" fill="${fill}" stroke="#fff" stroke-opacity=".5" stroke-width=".8"/>`);
+        bloom += ring(10, `<ellipse cx="0" cy="-15" rx="5" ry="15" fill="${inner}"/>`, 16);
+        bloom += '<circle r="12" fill="url(#pollen)"/>' + ring(11, '<circle cx="0" cy="-7" r="1.4" fill="#fff7d0"/>') + '<circle r="3" fill="#e4bd79"/>';
+      } else {
+        bloom = `<path d="M0 30C-35 18-37-18-25-38-11-27-4-8 0 30Z" fill="${fill}"/><path d="M0 30C35 18 37-18 25-38 11-27 4-8 0 30Z" fill="${fill}"/><path d="M0 31C-25 13-19-27 0-45 19-27 25 13 0 31Z" fill="${inner}"/><path d="M0 31C-24 19-28-3-18-20-5-14 0 4 0 31Z" fill="${fill}"/><path d="M0 31C24 19 28-3 18-20 5-14 0 4 0 31Z" fill="${fill}"/><path d="M0 26V-24" stroke="#fff" stroke-opacity=".35" fill="none"/>`;
+      }
+      return `<svg viewBox="-60 -55 120 170" aria-hidden="true">${stem}<g>${bloom}</g></svg>`;
+    }
+
+    function makeFlower(x, y, size, angle, type, color, seed = false) {
+      const el = document.createElement("div");
+      el.className = `flower${seed ? " seedling" : ""}`;
+      el.style.cssText = `left:${x}%;top:${y}%;--size:${size}px;--angle:${angle}deg;--sway:${rand(5, 9)}s;--offset:${rand(-8, 0)}s;`;
+      el.innerHTML = `<div class="flower-enter"><div class="flower-sway">${flowerSVG(type, color)}</div></div>`;
+      field.append(el);
+      return el;
+    }
+
+    function seedlings() {
+      field.replaceChildren();
+      const size = small() ? 83 : 132;
+      [[3, 87, -28, 4, 1], [10, 96, 16, 3, 3], [95, 83, 28, 4, 2], [87, 97, -14, 2, 4]].forEach(([x, y, a, t, c]) => makeFlower(x, y, size, a, t, c, true));
+    }
+
+    let state = "closed", timers = new Set(), liveAnimations = new Set(), petalInterval = null, resizeTimer;
+    const later = (fn, ms) => {
+      const id = setTimeout(() => { timers.delete(id); fn(); }, ms);
+      timers.add(id);
+      return id;
+    };
+
+    function animate(el, frames, options, remove = false) {
+      const a = el.animate(frames, options);
+      liveAnimations.add(a);
+      a.onfinish = () => {
+        liveAnimations.delete(a);
+        if (remove) el.remove();
+        else { a.cancel(); el.style.opacity = "1"; }
+      };
+      return a;
+    }
+
+    function bloomFlowers(origin, instant = false) {
+      field.querySelectorAll(".flower:not(.seedling)").forEach(el => el.remove());
+      const mobile = small(), landscape = innerHeight < 461 && innerWidth > innerHeight;
+      const wanted = mobile ? CONFIG.FLOWERS.MOBILE : innerWidth <= 1024 ? CONFIG.FLOWERS.TABLET : CONFIG.FLOWERS.DESKTOP;
+      const count = Math.max(5, Math.min(60, Math.round(reduced() ? Math.min(14, wanted) : wanted)));
+      for (let i = 0; i < count; i++) {
+        const side = i % 4, t = (Math.floor(i / 4) + .4) / Math.ceil(count / 4);
+        let x, y;
+        if (side < 2) { x = side ? rand(92, 102) : rand(-2, 8); y = 13 + t * 83; }
+        else { x = 7 + t * 86; y = side === 2 ? rand(7, 12) : rand(91, 99); }
+        if (mobile && side < 2) x = side ? rand(98, 104) : rand(-4, 2);
+        const size = mobile ? rand(70, 107) : landscape ? rand(78, 120) : rand(108, 181);
+        const angle = side === 0 ? rand(-55, -8) : side === 1 ? rand(8, 55) : rand(-35, 35);
+        const el = makeFlower(x, y, size, angle, i % 5, (i + Math.floor(i / 5)) % palettes.length);
+        const enter = el.firstElementChild;
+        if (instant || reduced()) { enter.style.opacity = "1"; continue; }
+        const dx = origin.x - innerWidth * x / 100, dy = origin.y - innerHeight * y / 100;
+        enter.style.willChange = "transform, opacity";
+        const a = animate(enter, [
+          { transform: `translate(${dx}px, ${dy}px) rotate(${angle - 95}deg) scale(.02)`, opacity: 0, offset: 0 },
+          { opacity: 1, offset: .12 },
+          { transform: `translate(0, 0) rotate(${angle + 4}deg) scale(1.08)`, opacity: 1, offset: .78 },
+          { transform: `translate(0, 0) rotate(${angle}deg) scale(1)`, opacity: 1, offset: 1 }
+        ], { duration: rand(1250, 1750) * speed, delay: (Math.floor(i / 4) * 60 + side * 75) * speed, easing: "cubic-bezier(.16,.8,.26,1)", fill: "both" });
+        const finish = a.onfinish;
+        a.onfinish = () => { finish(); enter.style.willChange = "auto"; };
+      }
+    }
+
+    function particle(kind, x, y, burst = false) {
+      if (reduced() || document.hidden || particleLayer.childElementCount >= (small() ? 40 : 70)) return;
+      const el = document.createElement("span"), size = kind === "sparkle" ? rand(7, 13) : rand(9, 19);
+      el.className = "particle";
+      el.style.setProperty("--size", `${size}px`);
+      el.style.color = ["#e9a1b6", "#e6b0c9", "#cbb2df", "#ebc183", "#efb7a6"][Math.floor(rand(0, 5))];
+      el.innerHTML = kind === "heart" ? heartSVG : kind === "sparkle" ? sparkleSVG : petalSVG;
+      particleLayer.append(el);
+      const dx = burst ? rand(-innerWidth * .38, innerWidth * .38) : rand(-65, 65);
+      const dy = kind === "petal" && !burst ? innerHeight + 90 : -rand(100, burst ? 340 : 180);
+      const spin = rand(-240, 240), duration = burst ? rand(2100, 3700) : kind === "petal" ? rand(6500, 10000) : rand(1800, 2700);
+      animate(el, [
+        { transform: `translate(${x}px, ${y}px) rotate(0deg) scale(.2)`, opacity: 0 },
+        { opacity: .78, offset: .15 },
+        { transform: `translate(${x + dx * .6}px, ${y + dy * .5}px) rotate(${spin * .5}deg) scale(1)`, opacity: .65, offset: .55 },
+        { transform: `translate(${x + dx}px, ${y + dy}px) rotate(${spin}deg) scale(.7)`, opacity: 0 }
+      ], { duration, easing: "cubic-bezier(.2,.6,.4,1)", fill: "both" }, true);
+    }
+
+    function startPetals() {
+      clearInterval(petalInterval);
+      petalInterval = null;
+      if (reduced() || document.hidden || state !== "open") return;
+      petalInterval = setInterval(() => particle("petal", rand(0, innerWidth), -25), small() ? 1300 : 850);
+    }
+
+    function ambient() {
+      $("ambient").replaceChildren();
+      const points = [[15, 29], [83, 18], [8, 58], [89, 60], [28, 78], [74, 80], [43, 12], [66, 43]];
+      points.slice(0, small() ? 5 : 8).forEach(([x, y], i) => {
+        const el = document.createElement("span");
+        el.className = "ambient-mote";
+        el.style.cssText = `left:${x}%;top:${y}%;width:${i % 2 ? 9 : 13}px;height:${i % 2 ? 9 : 13}px;--duration:${rand(4, 7)}s;--offset:${-i}s;`;
+        el.innerHTML = i % 3 === 0 ? heartSVG : i % 3 === 1 ? sparkleSVG : petalSVG;
+        $("ambient").append(el);
+      });
+    }
+
+    /* ==========================================================
+       07. VẼ SVG 2 BẠN CÁ CHIBI (KÈM VƯƠNG MIỆN TIẾN HÓA) & MỒI ĂN
+       ========================================================== */
+    function createChibiFishSVG(cfg) {
+      const uid = "fish_" + cfg.id;
+      const isGirl = cfg.variant === "girl";
+
+      // Phụ kiện ban đầu (mũ thủy thủ beret cho camapp / nơ hồng cho cabeoo)
+      const baseAccessoryMarkup = isGirl
+        ? `
+          <g class="fish-base-accessory">
+            <g transform="translate(61, 17) rotate(-8)">
+              <path d="M0 0 C-10 -9 -15 3 -3 5 Z" fill="${cfg.accessoryColor}" stroke="${cfg.strokeColor}" stroke-width="1.4" stroke-linejoin="round"/>
+              <path d="M0 0 C10 -9 15 3 3 5 Z" fill="${cfg.accessoryColor}" stroke="${cfg.strokeColor}" stroke-width="1.4" stroke-linejoin="round"/>
+              <circle cx="0" cy="1" r="3.2" fill="#FFF5F8" stroke="${cfg.strokeColor}" stroke-width="1.3"/>
+            </g>
+          </g>
+        `
+        : `
+          <g class="fish-base-accessory">
+            <g transform="translate(59, 15) rotate(-10)">
+              <ellipse cx="0" cy="2" rx="11" ry="5.5" fill="${cfg.accessoryColor}" stroke="${cfg.strokeColor}" stroke-width="1.5"/>
+              <path d="M-8 3 Q0 -1 8 3" stroke="#7B9FF2" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <circle cx="0" cy="-3.5" r="2.4" fill="#FFE082" stroke="${cfg.strokeColor}" stroke-width="1.2"/>
+            </g>
+          </g>
+        `;
+
+      // Vương miện nhỏ lấp lánh xuất hiện khi ăn đủ 5 viên mồi
+      // - cabeoo: Vương miện Công chúa gắn hồng ngọc trái tim & nơ ruy-băng nhỏ
+      // - camapp: Vương miện Hoàng tử gắn đá Sapphire xanh biển
+      const centerGemMarkup = isGirl
+        ? `<path d="M0 2.5 C0 2.5 -4 -0.5 -4 -2.8 C-4 -4.4 -2.2 -5.2 -0.8 -4 C0 -3.2 0 -3.2 0.8 -4 C2.2 -5.2 4 -4.4 4 -2.8 C4 -0.5 0 2.5 0 2.5 Z" fill="#FF4D79" stroke="#FFFDF9" stroke-width="0.7"/>`
+        : `<polygon points="0,-5.2 3.4,-1.2 0,2.8 -3.4,-1.2" fill="#4A8CFF" stroke="#FFFDF9" stroke-width="0.7"/>`;
+
+      const crownMarkup = `
+        <g transform="translate(60, 14) rotate(-6)">
+          <g class="fish-crown">
+            <!-- Thân vương miện vàng ánh kim -->
+            <path
+              d="M-11 4 L-13 -7 L-5 -1.5 L0 -10.5 L5 -1.5 L13 -7 L11 4 Z"
+              fill="url(#crownGrad_${uid})"
+              stroke="#C68B2C"
+              stroke-width="1.4"
+              stroke-linejoin="round"
+            />
+            <!-- Đai vương miện -->
+            <rect x="-11" y="2.2" width="22" height="3.2" rx="1.5" fill="#FFE082" stroke="#C68B2C" stroke-width="1.2"/>
+            <!-- 3 viên ngọc trai trên 3 đỉnh vương miện -->
+            <circle cx="-13" cy="-7.8" r="2" fill="#FFFDF9" stroke="#C68B2C" stroke-width="1"/>
+            <circle cx="0" cy="-11.5" r="2.4" fill="#FFFDF9" stroke="#C68B2C" stroke-width="1"/>
+            <circle cx="13" cy="-7.8" r="2" fill="#FFFDF9" stroke="#C68B2C" stroke-width="1"/>
+            <!-- Đá quý trung tâm (Tim hồng cho cabeoo / Sapphire xanh cho camapp) -->
+            ${centerGemMarkup}
+            <!-- 2 ngôi sao lấp lánh hai bên vương miện -->
+            <path class="crown-sparkle" d="M-18 -9 L-16.5 -5.5 L-13 -4 L-16.5 -2.5 L-18 1 L-19.5 -2.5 L-23 -4 L-19.5 -5.5 Z" fill="#FFF3B0" stroke="#E0A838" stroke-width="0.6"/>
+            <path class="crown-sparkle s2" d="M18 -11 L19.2 -8 L22.2 -6.8 L19.2 -5.6 L18 -2.6 L16.8 -5.6 L13.8 -6.8 L16.8 -8 Z" fill="#FFF3B0" stroke="#E0A838" stroke-width="0.6"/>
+          </g>
+        </g>
+      `;
+
+      const bodyDetailMarkup = isGirl
+        ? `
+          <circle cx="48" cy="36" r="2.2" fill="#FFFFFF" opacity="0.55"/>
+          <circle cx="42" cy="41" r="1.5" fill="#FFFFFF" opacity="0.45"/>
+        `
+        : `
+          <path d="M46 23 Q49 32 45 40" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.5"/>
+          <path d="M39 26 Q42 33 38 40" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.4"/>
+        `;
+
+      const eyelashesMarkup = isGirl
+        ? `<path d="M77 32 L81 29 M79 35 L83 34" stroke="#593647" stroke-width="1.7" stroke-linecap="round"/>`
+        : "";
+
+      return `
+        <svg class="fish-svg" viewBox="0 0 110 90">
+          <defs>
+            <radialGradient id="bodyGrad_${uid}" cx="62%" cy="35%" r="65%">
+              <stop offset="0%" stop-color="${cfg.bodyLight}"/>
+              <stop offset="58%" stop-color="${cfg.bodyMain}"/>
+              <stop offset="100%" stop-color="${cfg.bodyDeep}"/>
+            </radialGradient>
+            <linearGradient id="finGrad_${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="${cfg.bodyLight}"/>
+              <stop offset="100%" stop-color="${cfg.finColor}"/>
+            </linearGradient>
+            <linearGradient id="crownGrad_${uid}" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#FFF9C4"/>
+              <stop offset="55%" stop-color="#FFD54F"/>
+              <stop offset="100%" stop-color="#F5B041"/>
+            </linearGradient>
+          </defs>
+          <g class="fish-tail-group">
+            <path d="M34 45 C20 26 7 24 11 39 C13 44 18 45 18 45 C18 45 13 46 11 51 C7 66 20 64 34 45 Z" fill="url(#finGrad_${uid})" stroke="${cfg.strokeColor}" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M28 45 L15 37 M28 45 L15 53" stroke="${cfg.strokeColor}" stroke-width="1.1" stroke-linecap="round" opacity="0.45"/>
+          </g>
+          <path d="M45 22 C49 9 65 11 68 22 Z" fill="url(#finGrad_${uid})" stroke="${cfg.strokeColor}" stroke-width="1.7" stroke-linejoin="round"/>
+          <path d="M48 66 C50 75 61 75 63 66 Z" fill="url(#finGrad_${uid})" stroke="${cfg.strokeColor}" stroke-width="1.6" stroke-linejoin="round"/>
+          <ellipse cx="61" cy="45" rx="31" ry="24.5" fill="url(#bodyGrad_${uid})" stroke="${cfg.strokeColor}" stroke-width="2"/>
+          <path d="M38 53 Q62 69 86 52 Q76 66 59 66 Q44 66 38 53 Z" fill="#FFFFFF" opacity="0.42"/>
+          ${bodyDetailMarkup}
+          <ellipse class="fish-cheek" cx="72" cy="49" rx="5.2" ry="3.2" fill="${cfg.cheekColor}" opacity="0.75"/>
+          <g class="fish-eye-normal">
+            ${eyelashesMarkup}
+            <circle cx="74" cy="39" r="5.6" fill="#3D2635"/>
+            <circle cx="72.2" cy="37" r="2.2" fill="#FFFFFF"/>
+            <circle cx="76.2" cy="41.2" r="1.1" fill="#FFFFFF" opacity="0.9"/>
+          </g>
+          <g class="fish-eye-blink">
+            <path d="M68.5 39.5 Q74 43 79.5 39.5" stroke="#3D2635" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          </g>
+          <g class="fish-eye-happy">
+            <path d="M68.5 40.5 Q74 34 79.5 40.5" stroke="#3D2635" stroke-width="2.3" stroke-linecap="round" fill="none"/>
+          </g>
+          <path class="fish-mouth-normal" d="M81 47.5 Q83.2 50.2 85.4 47.5 Q87.5 50.2 89.5 47.2" stroke="#3D2635" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle class="fish-mouth-o" cx="85.5" cy="48.5" r="3" fill="#FF7B9C" stroke="#3D2635" stroke-width="1.5"/>
+          <g class="fish-fin-side">
+            <path d="M55 51 C44 48 42 59 53 60 C57 60 58 53 55 51 Z" fill="url(#finGrad_${uid})" stroke="${cfg.strokeColor}" stroke-width="1.6" stroke-linejoin="round"/>
+          </g>
+          ${baseAccessoryMarkup}
+          ${crownMarkup}
+        </svg>
+      `;
+    }
+
+    // 3 mẫu viên mồi pastel đáng yêu: Ngôi sao bơ vàng, Tim dâu hồng, Ngọc trai đường
+    function createFoodSVG(kindIndex) {
+      if (kindIndex % 3 === 0) {
+        return `
+          <svg viewBox="0 0 32 32" width="100%" height="100%">
+            <path d="M16 3 L19.8 10.8 L28.4 12 L22.2 18 L23.7 26.6 L16 22.5 L8.3 26.6 L9.8 18 L3.6 12 L12.2 10.8 Z" fill="#FFE58F" stroke="#D9A74A" stroke-width="1.6" stroke-linejoin="round"/>
+            <circle cx="13" cy="14" r="1.4" fill="#6E4B3A"/>
+            <circle cx="19" cy="14" r="1.4" fill="#6E4B3A"/>
+            <path d="M14.5 17 Q16 18.5 17.5 17" stroke="#6E4B3A" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          </svg>
+        `;
+      }
+      if (kindIndex % 3 === 1) {
+        return `
+          <svg viewBox="0 0 32 32" width="100%" height="100%">
+            <path d="M16 27 C16 27 5 19.2 5 11.2 C5 6.8 8.6 3.8 12.4 3.8 C14.6 3.8 16 5.2 16 6.8 C16 5.2 17.4 3.8 19.6 3.8 C23.4 3.8 27 6.8 27 11.2 C27 19.2 16 27 16 27 Z" fill="#FFA6C1" stroke="#D66086" stroke-width="1.6" stroke-linejoin="round"/>
+            <circle cx="11.5" cy="10.5" r="2" fill="#FFFFFF" opacity="0.75"/>
+          </svg>
+        `;
+      }
+      return `
+        <svg viewBox="0 0 32 32" width="100%" height="100%">
+          <circle cx="16" cy="16" r="10" fill="#FCE4EC" stroke="#D88AA2" stroke-width="1.6"/>
+          <circle cx="16" cy="16" r="6.5" fill="#F8BBD0"/>
+          <circle cx="12.5" cy="12.5" r="2.3" fill="#FFFFFF" opacity="0.9"/>
+        </svg>
+      `;
+    }
+
+    /* ==========================================================
+       08. HỆ THỐNG THẾ GIỚI 2 BẠN CÁ, CHO ĂN & TIẾN HÓA ĐEO VƯƠNG MIỆN
+       ========================================================== */
+    const FishWorld = {
+      active: false,
+      rafId: null,
+      lastTime: 0,
+      fishes: [],
+      foods: [],
+      foodCounter: 0,
+      bothEvolvedCelebrated: false,
+      mode: "wander",
+      modeTimer: 0,
+      loveCooldown: 0,
+      activeParticles: 0,
+      maxParticles: 18,
+      hintTimer: null,
+      tagTimer: null,
+      bounds: {
+        vw: window.innerWidth,
+        vh: window.innerHeight,
+        letterRect: null
+      },
+
+      updateBoundsCache() {
+        this.bounds.vw = window.innerWidth;
+        this.bounds.vh = window.innerHeight;
+        this.maxParticles = small() ? 10 : 20;
+
+        if (state === "open") {
+          const r = $("letter").getBoundingClientRect();
+          this.bounds.letterRect = {
+            left: r.left,
+            right: r.right,
+            top: r.top,
+            bottom: r.bottom
+          };
+        } else {
+          this.bounds.letterRect = null;
+        }
+      },
+
+      spawnFromEnvelope(origin) {
+        if (!CONFIG.FISH_ENABLED || !Array.isArray(CONFIG.FISH) || CONFIG.FISH.length === 0) return;
+        this.stopAndClear();
+        this.active = true;
+        this.updateBoundsCache();
+
+        const vw = this.bounds.vw, vh = this.bounds.vh;
+        const startX = origin ? origin.x : vw / 2;
+        const startY = origin ? origin.y : vh / 2;
+
+        CONFIG.FISH.forEach((cfg, idx) => {
+          const el = document.createElement("div");
+          el.className = "fish-actor just-popped show-tag";
+          el.setAttribute("role", "button");
+          el.setAttribute("tabindex", "0");
+          el.setAttribute("aria-label", `${cfg.name}, bạn cá nhỏ dễ thương, có thể giữ kéo hoặc chạm đúp vào nền để cho ăn`);
+          el.style.setProperty("--fish-scale", cfg.sizeScale || 1);
+
+          el.innerHTML = `
+            <div class="fish-nametag">${cfg.name}</div>
+            <div class="fish-scale-wrap">
+              <div class="fish-flip-wrap">
+                ${createChibiFishSVG(cfg)}
+              </div>
+            </div>
+          `;
+
+          fishWorldLayer.appendChild(el);
+
+          const side = idx === 0 ? -1 : 1;
+          const fishObj = {
+            idx,
+            id: cfg.id,
+            name: cfg.name,
+            cfg,
+            el,
+            nametagEl: el.querySelector(".fish-nametag"),
+            flipEl: el.querySelector(".fish-flip-wrap"),
+            tailEl: el.querySelector(".fish-tail-group"),
+            finEl: el.querySelector(".fish-fin-side"),
+            x: startX + side * 24,
+            y: startY,
+            vx: side * (165 + Math.random() * 55),
+            vy: (idx === 0 ? -1 : 1) * (115 + Math.random() * 45),
+            wanderAngle: idx === 0 ? -Math.PI * 0.75 : Math.PI * 0.25,
+            facing: side,
+            tilt: 0,
+            spinAngle: 0,
+            wagPhase: Math.random() * Math.PI * 2,
+            blinkTimer: 1.5 + Math.random() * 3.5,
+            bubbleTimer: 0.9 + Math.random() * 1.8,
+            eatenCount: 0,        // Đếm số viên mồi bạn cá đã ăn
+            evolved: false,       // Đã tiến hóa đeo vương miện hay chưa
+            isDragging: false,
+            pointerId: null,
+            dragTargetX: startX,
+            dragTargetY: startY,
+            dragOffsetX: 0,
+            dragOffsetY: 0,
+            downX: 0,
+            downY: 0,
+            downTime: 0,
+            lastMoveX: 0,
+            lastMoveY: 0,
+            throwVx: 0,
+            throwVy: 0,
+            inertiaTimer: 0
+          };
+
+          this.spawnBubbleOrHeart(fishObj.x, fishObj.y, "bubble", 4);
+          this.bindFishEvents(fishObj);
+          this.fishes.push(fishObj);
+
+          later(() => el.classList.remove("just-popped"), 800);
+        });
+
+        this.tagTimer = setTimeout(() => {
+          this.fishes.forEach(f => f.el.classList.remove("show-tag"));
+        }, 5500);
+
+        fishHintToast.classList.add("visible");
+        this.hintTimer = setTimeout(() => {
+          fishHintToast.classList.remove("visible");
+        }, 8500);
+
+        this.mode = "wander";
+        this.modeTimer = 5.5;
+        this.lastTime = performance.now();
+        this.rafId = requestAnimationFrame(t => this.tick(t));
+      },
+
+      // THẢ MỒI CHO CÁ ĂN KHI NGƯỜI DÙNG CHẠM ĐÚP (DOUBLE-TAP / DOUBLE-CLICK)
+      dropFood(x, y) {
+        if (!this.active || state !== "open") return;
+        fishHintToast.classList.remove("visible");
+
+        const settings = CONFIG.FISH_SETTINGS || {};
+        const maxFoods = settings.maxFoods || 6;
+
+        if (this.foods.length >= maxFoods) {
+          const oldest = this.foods.shift();
+          if (oldest && oldest.el) oldest.el.remove();
+        }
+
+        const ripple = document.createElement("div");
+        ripple.className = "food-ripple";
+        ripple.style.setProperty("--x", `${x.toFixed(1)}px`);
+        ripple.style.setProperty("--y", `${y.toFixed(1)}px`);
+        fishFxLayer.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 760);
+
+        const foodEl = document.createElement("div");
+        foodEl.className = "fish-food";
+        const kindIndex = this.foodCounter++;
+        foodEl.innerHTML = `<div class="fish-food-inner">${createFoodSVG(kindIndex)}</div>`;
+        foodEl.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
+        fishWorldLayer.appendChild(foodEl);
+
+        const foodObj = {
+          id: kindIndex,
+          el: foodEl,
+          x,
+          y,
+          baseX: x,
+          vy: 14 + Math.random() * 8,
+          swayPhase: Math.random() * Math.PI * 2,
+          rot: (Math.random() - 0.5) * 20,
+          eaten: false
+        };
+        this.foods.push(foodObj);
+
+        playInteractiveChime(740, 0.045);
+
+        this.fishes.forEach(f => {
+          if (!f.isDragging) {
+            f.inertiaTimer = 0;
+            this.spawnBubbleOrHeart(f.x, f.y - 6, "bubble", 1);
+          }
+        });
+      },
+
+      // Xử lý khoảnh khắc một bạn cá đớp trúng viên mồi & kiểm tra mốc 5 viên để tiến hóa
+      consumeFood(fish, food) {
+        if (food.eaten) return;
+        food.eaten = true;
+        food.el.classList.add("eaten");
+        setTimeout(() => food.el.remove(), 280);
+        this.foods = this.foods.filter(item => item !== food);
+
+        const settings = CONFIG.FISH_SETTINGS || {};
+        const targetCount = Math.max(1, Number(settings.evolveFoodCount) || 5);
+        fish.eatenCount += 1;
+
+        // NẾU ĐÃ ĂN ĐỦ 5 VIÊN MỒI (VÀ CHƯA TIẾN HÓA) -> KÍCH HOẠT TIẾN HÓA ĐEO VƯƠNG MIỆN!
+        if (!fish.evolved && fish.eatenCount >= targetCount) {
+          this.evolveFish(fish);
+          return;
+        }
+
+        // Hiệu ứng ăn mồi thông thường
+        fish.el.classList.remove("mouth-open", "just-ate");
+        void fish.el.offsetWidth;
+        fish.el.classList.add("happy", "just-ate", "show-tag");
+        fish.spinAngle = 360;
+
+        this.spawnBubbleOrHeart(food.x, food.y - 8, "heart", 4);
+        this.spawnBubbleOrHeart(food.x, food.y, "bubble", 3);
+        for (let i = 0; i < 4; i++) {
+          particle(i % 2 === 0 ? "sparkle" : "heart", food.x + rand(-12, 12), food.y + rand(-12, 12));
+        }
+
+        const yumList = settings.yumTexts || ["Măm măm! 😋"];
+        const baseText = yumList[Math.floor(Math.random() * yumList.length)];
+        // Hiển thị tiến độ (ví dụ "Măm măm! 😋 (3/5)") khi chưa tiến hóa để tạo sự hào hứng
+        const progressText = !fish.evolved ? ` (${fish.eatenCount}/${targetCount})` : "";
+
+        const yumTag = document.createElement("div");
+        yumTag.className = "fish-yum-tag";
+        yumTag.textContent = baseText + progressText;
+        const safeX = Math.max(75, Math.min(this.bounds.vw - 75, fish.x));
+        const safeY = Math.max(55, Math.min(this.bounds.vh - 30, fish.y - 18));
+        yumTag.style.setProperty("--x", `${safeX.toFixed(1)}px`);
+        yumTag.style.setProperty("--y", `${safeY.toFixed(1)}px`);
+        fishFxLayer.appendChild(yumTag);
+        setTimeout(() => yumTag.remove(), 1280);
+
+        playInteractiveChime(880, 0.06);
+
+        setTimeout(() => {
+          fish.el.classList.remove("happy", "just-ate");
+        }, 1100);
+      },
+
+      // BẤT NGỜ NHỎ: Tiến hóa nhẹ khi ăn đủ 5 viên mồi (lớn thêm, đeo vương miện, hiện lời nhắn)
+      evolveFish(fish) {
+        fish.evolved = true;
+        const settings = CONFIG.FISH_SETTINGS || {};
+        const scaleMult = settings.evolveScaleMultiplier || 1.22;
+
+        // Phóng to nhẹ bằng biến CSS --evolve-scale (chỉ dùng transform để giữ 60fps)
+        fish.el.style.setProperty("--evolve-scale", scaleMult);
+        fish.el.classList.remove("mouth-open", "just-ate", "just-evolved");
+        void fish.el.offsetWidth;
+        fish.el.classList.add("is-evolved", "just-evolved", "happy", "show-tag");
+
+        // Thêm vương miện nhỏ vào bảng tên chữ viết tay và cập nhật aria-label
+        if (fish.nametagEl) {
+          fish.nametagEl.textContent = `👑 ${fish.name}`;
+        }
+        fish.el.setAttribute("aria-label", `👑 ${fish.name} đã tiến hóa đeo vương miện lấp lánh`);
+
+        // Xoay 2 vòng vui sướng (720 độ)
+        if (!reduced()) {
+          fish.spinAngle = 720;
+        }
+
+        // Nổ pháo hoa lấp lánh, trái tim và bong bóng xung quanh bạn cá
+        this.spawnBubbleOrHeart(fish.x, fish.y - 12, "heart", 6);
+        this.spawnBubbleOrHeart(fish.x, fish.y, "bubble", 5);
+        for (let i = 0; i < (small() ? 10 : 18); i++) {
+          particle(i % 2 === 0 ? "sparkle" : "heart", fish.x + rand(-28, 28), fish.y + rand(-28, 28));
+        }
+
+        // Phát chuỗi âm thanh Fanfare 4 nốt nếu nhạc đang bật
+        playEvolutionFanfare();
+
+        // Hiện lời nhắn dễ thương dành riêng cho camapp hoặc cabeoo
+        const msgs = settings.evolveMessages || {};
+        const msgText = msgs[fish.id] || `👑 ${fish.name} đã ăn no và tiến hóa đeo vương miện rồi! ✨`;
+        this.showEvolveBanner(fish.x, fish.y - 24, msgText);
+
+        $("status").textContent = msgText;
+
+        setTimeout(() => {
+          fish.el.classList.remove("happy", "just-evolved");
+        }, 1600);
+
+        // Nếu cả 2 bạn cá đều đã tiến hóa -> Kích hoạt lễ kỷ niệm Cặp đôi Hoàng Gia!
+        const allEvolved = this.fishes.length >= 2 && this.fishes.every(f => f.evolved);
+        if (allEvolved && !this.bothEvolvedCelebrated) {
+          this.bothEvolvedCelebrated = true;
+          setTimeout(() => {
+            if (!this.active) return;
+            const f0 = this.fishes[0], f1 = this.fishes[1];
+            const midX = (f0.x + f1.x) / 2;
+            const midY = (f0.y + f1.y) / 2;
+            const bothMsg = (settings.evolveMessages && settings.evolveMessages.both)
+              || "👑 camapp ❤ cabeoo — Cặp đôi Hoàng Gia dưới đáy biển! 💞";
+            this.showEvolveBanner(midX, midY - 20, bothMsg);
+            this.mode = "kiss";
+            this.modeTimer = 5.0;
+            playEvolutionFanfare();
+          }, 1850);
+        }
+      },
+
+      // Hiển thị dải băng thông báo dễ thương khi cá tiến hóa
+      showEvolveBanner(x, y, text) {
+        const banner = document.createElement("div");
+        banner.className = "fish-evolve-banner";
+        banner.textContent = text;
+        const safeX = Math.max(145, Math.min(this.bounds.vw - 145, x));
+        const safeY = Math.max(85, Math.min(this.bounds.vh - 45, y));
+        banner.style.setProperty("--x", `${safeX.toFixed(1)}px`);
+        banner.style.setProperty("--y", `${safeY.toFixed(1)}px`);
+        fishFxLayer.appendChild(banner);
+        setTimeout(() => banner.remove(), 3250);
+      },
+
+      bindFishEvents(fish) {
+        const el = fish.el;
+
+        el.addEventListener("pointerdown", e => {
+          e.stopPropagation();
+          if (e.button !== undefined && e.button !== 0) return;
+
+          try { el.setPointerCapture(e.pointerId); } catch (_) { }
+
+          fish.isDragging = true;
+          fish.pointerId = e.pointerId;
+          fish.downX = e.clientX;
+          fish.downY = e.clientY;
+          fish.lastMoveX = e.clientX;
+          fish.lastMoveY = e.clientY;
+          fish.downTime = performance.now();
+          fish.dragOffsetX = fish.x - e.clientX;
+          fish.dragOffsetY = fish.y - e.clientY;
+          fish.dragTargetX = fish.x;
+          fish.dragTargetY = fish.y;
+          fish.throwVx = 0;
+          fish.throwVy = 0;
+          fish.inertiaTimer = 0;
+
+          el.classList.add("is-dragging", "surprised");
+          el.classList.remove("mouth-open");
+          fishHintToast.classList.remove("visible");
+
+          this.spawnBubbleOrHeart(fish.x, fish.y, "bubble", 3);
+
+          const other = this.fishes.find(f => f !== fish);
+          if (other) {
+            other.el.classList.add("happy");
+            this.spawnBubbleOrHeart(other.x, other.y - 12, "heart", 2);
+            setTimeout(() => other.el.classList.remove("happy"), 900);
+          }
+        });
+
+        el.addEventListener("pointermove", e => {
+          if (!fish.isDragging || e.pointerId !== fish.pointerId) return;
+          e.stopPropagation();
+
+          const margin = 28;
+          const nextX = Math.max(margin, Math.min(this.bounds.vw - margin, e.clientX + fish.dragOffsetX));
+          const nextY = Math.max(margin, Math.min(this.bounds.vh - margin, e.clientY + fish.dragOffsetY));
+
+          const dx = e.clientX - fish.lastMoveX;
+          const dy = e.clientY - fish.lastMoveY;
+          fish.throwVx = dx * 36;
+          fish.throwVy = dy * 36;
+
+          fish.lastMoveX = e.clientX;
+          fish.lastMoveY = e.clientY;
+          fish.dragTargetX = nextX;
+          fish.dragTargetY = nextY;
+        });
+
+        const endPointer = e => {
+          if (!fish.isDragging || (fish.pointerId !== null && e.pointerId !== fish.pointerId)) return;
+          e.stopPropagation();
+
+          try {
+            if (el.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId);
+          } catch (_) { }
+
+          fish.isDragging = false;
+          fish.pointerId = null;
+          el.classList.remove("is-dragging", "surprised");
+
+          const moveDist = Math.hypot(e.clientX - fish.downX, e.clientY - fish.downY);
+          const holdDuration = performance.now() - fish.downTime;
+
+          if (moveDist < 10 && holdDuration < 320) {
+            this.triggerFishTapReaction(fish);
+            return;
+          }
+
+          if (!reduced()) {
+            const maxThrow = 520;
+            const spd = Math.hypot(fish.throwVx, fish.throwVy);
+            if (spd > maxThrow) {
+              fish.throwVx = (fish.throwVx / spd) * maxThrow;
+              fish.throwVy = (fish.throwVy / spd) * maxThrow;
+            }
+            fish.vx = fish.throwVx;
+            fish.vy = fish.throwVy;
+            fish.inertiaTimer = 0.85;
+          }
+        };
+
+        el.addEventListener("pointerup", endPointer);
+        el.addEventListener("pointercancel", endPointer);
+
+        el.addEventListener("keydown", e => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            e.stopPropagation();
+            this.triggerFishTapReaction(fish);
+          }
+        });
+      },
+
+      triggerFishTapReaction(fish) {
+        fish.el.classList.add("happy", "show-tag");
+        fish.spinAngle = 360;
+        fish.vy = -120;
+        this.spawnBubbleOrHeart(fish.x, fish.y - 10, "heart", 3);
+        this.spawnBubbleOrHeart(fish.x, fish.y, "bubble", 3);
+        playInteractiveChime(659.25, 0.045);
+
+        setTimeout(() => {
+          fish.el.classList.remove("happy");
+        }, 950);
+      },
+
+      spawnBubbleOrHeart(x, y, type = "bubble", count = 1) {
+        if (this.activeParticles >= this.maxParticles) return;
+
+        for (let i = 0; i < count; i++) {
+          if (this.activeParticles >= this.maxParticles) break;
+          this.activeParticles++;
+
+          const item = document.createElement("div");
+          item.className = "fish-bubble";
+          const offsetX = (Math.random() - 0.5) * 24;
+          const offsetY = (Math.random() - 0.5) * 14;
+          const dx = (Math.random() - 0.5) * 34;
+          const dy = 42 + Math.random() * 44;
+          const dur = 1.5 + Math.random() * 0.85;
+          const scale = 0.7 + Math.random() * 0.5;
+
+          item.style.setProperty("--x", `${(x + offsetX).toFixed(1)}px`);
+          item.style.setProperty("--y", `${(y + offsetY).toFixed(1)}px`);
+          item.style.setProperty("--dx", `${dx.toFixed(1)}px`);
+          item.style.setProperty("--dy", `${dy.toFixed(1)}px`);
+          item.style.setProperty("--dur", `${dur.toFixed(2)}s`);
+          item.style.setProperty("--s", scale.toFixed(2));
+
+          if (type === "heart") {
+            const colors = ["#FF7597", "#FF9EB5", "#E86F8C"];
+            const c = colors[i % colors.length];
+            item.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="${c}"><path d="M12 21 3.5 12.8C-3.5 5.9 6-1 12 5.9 18-1 27.5 5.9 20.5 12.8Z"/></svg>`;
+          } else {
+            const size = 9 + Math.floor(Math.random() * 6);
+            item.innerHTML = `
+              <svg width="${size}" height="${size}" viewBox="0 0 20 20">
+                <circle cx="10" cy="10" r="8" fill="rgba(255,255,255,0.48)" stroke="#99C8FF" stroke-width="1.5"/>
+                <circle cx="7" cy="7" r="2.2" fill="#FFFFFF" opacity="0.9"/>
+              </svg>
+            `;
+          }
+
+          fishFxLayer.appendChild(item);
+          setTimeout(() => {
+            item.remove();
+            this.activeParticles = Math.max(0, this.activeParticles - 1);
+          }, dur * 1000);
+        }
+      },
+
+      triggerLoveEasterEgg(f1, f2, showBanner = true) {
+        this.loveCooldown = 5.2;
+        const midX = (f1.x + f2.x) / 2;
+        const midY = (f1.y + f2.y) / 2;
+
+        if (f1.x <= f2.x) { f1.facing = 1; f2.facing = -1; }
+        else { f1.facing = -1; f2.facing = 1; }
+
+        f1.el.classList.add("happy", "show-tag");
+        f2.el.classList.add("happy", "show-tag");
+
+        for (let i = 0; i < 10; i++) {
+          particle(i % 2 === 0 ? "heart" : "petal", midX + rand(-20, 20), midY + rand(-20, 20));
+        }
+        this.spawnBubbleOrHeart(midX, midY - 10, "heart", 5);
+        this.spawnBubbleOrHeart(midX, midY, "bubble", 4);
+        playInteractiveChime(1046.5, 0.06);
+
+        if (showBanner) {
+          const banner = document.createElement("div");
+          banner.className = "fish-love-banner";
+          const bothEvolved = f1.evolved && f2.evolved;
+          const defaultBanner = (CONFIG.FISH_SETTINGS && CONFIG.FISH_SETTINGS.loveBannerText) || "camapp ❤ cabeoo";
+          banner.textContent = bothEvolved ? `👑 ${defaultBanner} 👑` : defaultBanner;
+          const safeX = Math.max(110, Math.min(this.bounds.vw - 110, midX));
+          const safeY = Math.max(80, Math.min(this.bounds.vh - 40, midY));
+          banner.style.setProperty("--x", `${safeX.toFixed(1)}px`);
+          banner.style.setProperty("--y", `${safeY.toFixed(1)}px`);
+          fishFxLayer.appendChild(banner);
+          setTimeout(() => banner.remove(), 2450);
+        }
+
+        setTimeout(() => {
+          f1.el.classList.remove("happy");
+          f2.el.classList.remove("happy");
+        }, 1400);
+      },
+
+      pickNextPlayMode() {
+        const modes = ["wander", "chase_0_1", "chase_1_0", "orbit", "kiss"];
+        this.mode = modes[Math.floor(Math.random() * modes.length)];
+        const playfulness = (CONFIG.FISH_SETTINGS && CONFIG.FISH_SETTINGS.playfulness) || 1.0;
+        this.modeTimer = (4.5 + Math.random() * 4.0) / Math.max(0.5, playfulness);
+
+        if (Math.random() < 0.35 && !reduced() && this.fishes.length > 0 && this.foods.length === 0) {
+          const luckyFish = this.fishes[Math.floor(Math.random() * this.fishes.length)];
+          if (!luckyFish.isDragging) {
+            luckyFish.spinAngle = 360;
+            this.spawnBubbleOrHeart(luckyFish.x, luckyFish.y, "bubble", 2);
+          }
+        }
+      },
+
+      tick(now) {
+        if (!this.active) return;
+
+        const dt = Math.min(0.05, Math.max(0.001, (now - this.lastTime) / 1000));
+        this.lastTime = now;
+
+        const settings = CONFIG.FISH_SETTINGS || {};
+        const baseSpeed = (settings.baseSpeed || 68) * (reduced() ? 0.55 : 1);
+        const foodChaseMult = settings.foodChaseSpeedMultiplier || 1.65;
+        const playfulness = settings.playfulness || 1.0;
+        const vw = this.bounds.vw, vh = this.bounds.vh;
+        const margin = 40;
+
+        if (this.loveCooldown > 0) this.loveCooldown -= dt;
+
+        // 1. Cập nhật các viên mồi đang chìm lơ lửng trong nước
+        for (let i = this.foods.length - 1; i >= 0; i--) {
+          const food = this.foods[i];
+          if (food.eaten) continue;
+          food.swayPhase += dt * 3.2;
+          food.y += food.vy * dt;
+          food.x = food.baseX + Math.sin(food.swayPhase) * 8;
+
+          if (food.y > vh - 48) {
+            food.y = vh - 48;
+            food.vy = 0;
+          }
+          food.el.style.transform = `translate3d(${food.x.toFixed(1)}px, ${food.y.toFixed(1)}px, 0) rotate(${(Math.sin(food.swayPhase) * 12).toFixed(1)}deg)`;
+        }
+
+        this.modeTimer -= dt;
+        if (this.modeTimer <= 0) this.pickNextPlayMode();
+
+        const f0 = this.fishes[0], f1 = this.fishes[1];
+        const someoneDragging = (f0 && f0.isDragging) || (f1 && f1.isDragging);
+
+        if (f0 && f1 && this.loveCooldown <= 0) {
+          const distBetween = Math.hypot(f0.x - f1.x, f0.y - f1.y);
+          if (someoneDragging && distBetween < 78) {
+            this.triggerLoveEasterEgg(f0, f1, true);
+          } else if (!someoneDragging && this.foods.length === 0 && this.mode === "kiss" && distBetween < 66) {
+            this.triggerLoveEasterEgg(f0, f1, false);
+            this.mode = "orbit";
+            this.modeTimer = 4.0;
+          }
+        }
+
+        // 2. Cập nhật chuyển động của từng bạn cá
+        this.fishes.forEach((fish, idx) => {
+          const other = this.fishes[1 - idx];
+          const hitRadius = fish.evolved ? 32 : 26;
+
+          if (fish.isDragging) {
+            const lerpFactor = 1 - Math.pow(1 - (settings.dragLerp || 0.28), dt * 60);
+            const prevX = fish.x, prevY = fish.y;
+
+            fish.x += (fish.dragTargetX - fish.x) * lerpFactor;
+            fish.y += (fish.dragTargetY - fish.y) * lerpFactor;
+
+            const instVx = (fish.x - prevX) / dt;
+            const instVy = (fish.y - prevY) / dt;
+
+            if (Math.abs(instVx) > 8) fish.facing = instVx >= 0 ? 1 : -1;
+            const targetTilt = Math.max(-28, Math.min(28, (instVy * 0.06) * fish.facing));
+            fish.tilt += (targetTilt - fish.tilt) * 0.25;
+            fish.wagPhase += dt * 22;
+
+            this.foods.forEach(food => {
+              if (!food.eaten && Math.hypot(fish.x - food.x, fish.y - food.y) < hitRadius + 6) {
+                this.consumeFood(fish, food);
+              }
+            });
+          } else if (fish.inertiaTimer > 0) {
+            fish.inertiaTimer -= dt;
+            const friction = Math.pow(settings.throwFriction || 0.94, dt * 60);
+            fish.vx *= friction;
+            fish.vy *= friction;
+
+            fish.x += fish.vx * dt;
+            fish.y += fish.vy * dt;
+
+            if (fish.x < margin) { fish.x = margin; fish.vx = Math.abs(fish.vx) * 0.75; }
+            else if (fish.x > vw - margin) { fish.x = vw - margin; fish.vx = -Math.abs(fish.vx) * 0.75; }
+
+            if (fish.y < margin) { fish.y = margin; fish.vy = Math.abs(fish.vy) * 0.75; }
+            else if (fish.y > vh - margin) { fish.y = vh - margin; fish.vy = -Math.abs(fish.vy) * 0.75; }
+
+            if (Math.abs(fish.vx) > 6) fish.facing = fish.vx >= 0 ? 1 : -1;
+            fish.wanderAngle = Math.atan2(fish.vy, fish.vx);
+            fish.wagPhase += dt * 15;
+          } else {
+            fish.wanderAngle += (Math.random() - 0.5) * 2.4 * dt * playfulness;
+            let desiredVx = Math.cos(fish.wanderAngle) * baseSpeed;
+            let desiredVy = Math.sin(fish.wanderAngle) * baseSpeed;
+            let chasingFood = false;
+
+            // ƯU TIÊN SỐ 1: Nếu có mồi ăn trên màn hình -> Bơi đua tới đớp mồi!
+            if (this.foods.length > 0) {
+              let nearestFood = null;
+              let minDist = Infinity;
+              for (const food of this.foods) {
+                if (food.eaten) continue;
+                const d = Math.hypot(food.x - fish.x, food.y - fish.y);
+                // Nếu một bạn cá đã tiến hóa còn bạn kia chưa tiến hóa, nhường nhẹ một chút để bạn kia dễ đuổi kịp mốc 5 viên
+                const fairnessPenalty = (fish.evolved && other && !other.evolved) ? 18 : 0;
+                if (d + fairnessPenalty < minDist) {
+                  minDist = d;
+                  nearestFood = food;
+                }
+              }
+
+              if (nearestFood) {
+                chasingFood = true;
+                const angleToFood = Math.atan2(nearestFood.y - fish.y, nearestFood.x - fish.x);
+                const fairnessSpeed = (fish.evolved && other && !other.evolved) ? 0.92 : 1.02;
+                const raceBoost = foodChaseMult * fairnessSpeed;
+                desiredVx = Math.cos(angleToFood) * baseSpeed * raceBoost;
+                desiredVy = Math.sin(angleToFood) * baseSpeed * raceBoost;
+                fish.wanderAngle = angleToFood;
+
+                if (minDist < 72) {
+                  fish.el.classList.add("mouth-open");
+                } else {
+                  fish.el.classList.remove("mouth-open");
+                }
+
+                if (minDist < hitRadius) {
+                  this.consumeFood(fish, nearestFood);
+                }
+              }
+            } else {
+              fish.el.classList.remove("mouth-open");
+            }
+
+            // ƯU TIÊN SỐ 2: Nếu không có mồi, thực hiện hành vi tương tác với bạn cá kia
+            if (!chasingFood) {
+              if (other && other.isDragging) {
+                const orbitAngle = now * 0.0035 + idx * Math.PI;
+                const targetX = other.x + Math.cos(orbitAngle) * 78;
+                const targetY = other.y + Math.sin(orbitAngle) * 58;
+                const angleToFriend = Math.atan2(targetY - fish.y, targetX - fish.x);
+                desiredVx = Math.cos(angleToFriend) * baseSpeed * 1.45;
+                desiredVy = Math.sin(angleToFriend) * baseSpeed * 1.45;
+                fish.wanderAngle = angleToFriend;
+              } else if (other) {
+                if ((this.mode === "chase_0_1" && idx === 0) || (this.mode === "chase_1_0" && idx === 1)) {
+                  const angle = Math.atan2(other.y - fish.y, other.x - fish.x);
+                  desiredVx = Math.cos(angle) * baseSpeed * 1.32;
+                  desiredVy = Math.sin(angle) * baseSpeed * 1.32;
+                  fish.wanderAngle = angle;
+                } else if (this.mode === "orbit") {
+                  const midX = (fish.x + other.x) * 0.5;
+                  const midY = (fish.y + other.y) * 0.5;
+                  const orbitAng = now * 0.0022 + (idx === 0 ? 0 : Math.PI);
+                  const tx = midX + Math.cos(orbitAng) * 68;
+                  const ty = midY + Math.sin(orbitAng) * 52;
+                  const angle = Math.atan2(ty - fish.y, tx - fish.x);
+                  desiredVx = Math.cos(angle) * baseSpeed * 1.18;
+                  desiredVy = Math.sin(angle) * baseSpeed * 1.18;
+                } else if (this.mode === "kiss") {
+                  const angle = Math.atan2(other.y - fish.y, other.x - fish.x);
+                  desiredVx = Math.cos(angle) * baseSpeed * 1.15;
+                  desiredVy = Math.sin(angle) * baseSpeed * 1.15;
+                }
+              }
+
+              // Lực đẩy mềm tránh vùng chữ của bức thư khi bơi tự do
+              const rect = this.bounds.letterRect;
+              if (rect && !(other && other.isDragging)) {
+                const pad = settings.avoidLetterPadding || 24;
+                const left = rect.left - pad, right = rect.right + pad;
+                const top = rect.top - pad, bottom = rect.bottom + pad;
+
+                if (fish.x > left && fish.x < right && fish.y > top && fish.y < bottom) {
+                  const dLeft = fish.x - left, dRight = right - fish.x;
+                  const dTop = fish.y - top, dBottom = bottom - fish.y;
+                  const minDist = Math.min(dLeft, dRight, dTop, dBottom);
+                  const pushStrength = baseSpeed * 2.4;
+
+                  if (minDist === dLeft) desiredVx -= pushStrength;
+                  else if (minDist === dRight) desiredVx += pushStrength;
+                  else if (minDist === dTop) desiredVy -= pushStrength;
+                  else desiredVy += pushStrength;
+
+                  fish.wanderAngle = Math.atan2(desiredVy, desiredVx);
+                }
+              }
+            }
+
+            const edgeSoft = 62;
+            if (fish.x < edgeSoft) desiredVx += baseSpeed * 1.6;
+            if (fish.x > vw - edgeSoft) desiredVx -= baseSpeed * 1.6;
+            if (fish.y < edgeSoft) desiredVy += baseSpeed * 1.6;
+            if (fish.y > vh - edgeSoft) desiredVy -= baseSpeed * 1.6;
+
+            const steerRate = Math.min(1, dt * (chasingFood ? 6.5 : 3.8));
+            fish.vx += (desiredVx - fish.vx) * steerRate;
+            fish.vy += (desiredVy - fish.vy) * steerRate;
+
+            fish.x += fish.vx * dt;
+            fish.y += fish.vy * dt;
+
+            fish.x = Math.max(margin, Math.min(vw - margin, fish.x));
+            fish.y = Math.max(margin, Math.min(vh - margin, fish.y));
+
+            if (Math.abs(fish.vx) > 5) fish.facing = fish.vx >= 0 ? 1 : -1;
+
+            const curSpeed = Math.hypot(fish.vx, fish.vy);
+            const targetTilt = Math.max(-22, Math.min(22, (fish.vy / Math.max(30, baseSpeed)) * 14 * fish.facing));
+            fish.tilt += (targetTilt - fish.tilt) * 0.16;
+            fish.wagPhase += dt * (6 + (curSpeed / baseSpeed) * (chasingFood ? 10 : 6));
+          }
+
+          if (fish.spinAngle > 0.5) {
+            fish.spinAngle = Math.max(0, fish.spinAngle - dt * 560);
+          } else {
+            fish.spinAngle = 0;
+          }
+
+          fish.blinkTimer -= dt;
+          if (fish.blinkTimer <= 0) {
+            fish.el.classList.add("blinking");
+            setTimeout(() => fish.el.classList.remove("blinking"), 150);
+            fish.blinkTimer = 2.4 + Math.random() * 4.2;
+          }
+
+          fish.bubbleTimer -= dt;
+          if (fish.bubbleTimer <= 0) {
+            const isHeart = Math.random() < (fish.evolved ? 0.45 : 0.25);
+            const mouthX = fish.x + fish.facing * 24;
+            const mouthY = fish.y - 4;
+            this.spawnBubbleOrHeart(mouthX, mouthY, isHeart ? "heart" : "bubble", 1);
+            fish.bubbleTimer = 1.6 + Math.random() * 2.8;
+          }
+
+          fish.el.style.transform = `translate3d(${fish.x.toFixed(1)}px, ${fish.y.toFixed(1)}px, 0)`;
+          fish.flipEl.style.transform = `scaleX(${fish.facing}) rotate(${(fish.tilt + fish.spinAngle).toFixed(1)}deg)`;
+
+          const wagDeg = Math.sin(fish.wagPhase) * (fish.isDragging ? 20 : 13);
+          const finDeg = Math.cos(fish.wagPhase * 1.1) * (fish.isDragging ? 18 : 11);
+          fish.tailEl.style.transform = `rotate(${wagDeg.toFixed(1)}deg)`;
+          fish.finEl.style.transform = `rotate(${finDeg.toFixed(1)}deg)`;
+        });
+
+        this.rafId = requestAnimationFrame(t => this.tick(t));
+      },
+
+      handleVisibilityChange() {
+        if (!this.active) return;
+        if (document.hidden) {
+          if (this.rafId) {
+            cancelAnimationFrame(this.rafId);
+            this.rafId = null;
+          }
+        } else if (!this.rafId) {
+          this.lastTime = performance.now();
+          this.rafId = requestAnimationFrame(t => this.tick(t));
+        }
+      },
+
+      stopAndClear() {
+        this.active = false;
+        this.bothEvolvedCelebrated = false;
+        if (this.rafId) {
+          cancelAnimationFrame(this.rafId);
+          this.rafId = null;
+        }
+        if (this.hintTimer) {
+          clearTimeout(this.hintTimer);
+          this.hintTimer = null;
+        }
+        if (this.tagTimer) {
+          clearTimeout(this.tagTimer);
+          this.tagTimer = null;
+        }
+        this.fishes = [];
+        this.foods = [];
+        this.activeParticles = 0;
+        fishWorldLayer.replaceChildren();
+        fishFxLayer.replaceChildren();
+        fishHintToast.classList.remove("visible");
+      }
+    };
+
+    /* ==========================================================
+       09. Chuỗi mở thư & mở lại (Replay) + Phát hiện Chạm đúp thả mồi
+       ========================================================== */
+    function openLetter() {
+      if (state !== "closed") return;
+      state = "opening";
+      const rect = openButton.getBoundingClientRect();
+      const origin = { x: rect.left + rect.width / 2, y: rect.top + rect.height * .5 };
+      openButton.disabled = true;
+      openButton.setAttribute("aria-expanded", "true");
+      scene.classList.add("is-opening");
+
+      later(() => {
+        bloomFlowers(origin);
+        if (!reduced()) {
+          for (let i = 0; i < (small() ? 22 : 38); i++) {
+            later(() => particle(i % 4 === 0 ? "heart" : i % 3 === 0 ? "sparkle" : "petal", origin.x + rand(-35, 35), origin.y, true), i * 22 * speed);
+          }
+        }
+      }, reduced() ? 0 : 680 * speed);
+
+      later(() => {
+        state = "open";
+        scene.classList.add("is-open");
+        $("letter-layer").inert = false;
+        $("letter-layer").setAttribute("aria-hidden", "false");
+        $("intro").setAttribute("aria-hidden", "true");
+        $("letter").focus({ preventScroll: true });
+        $("status").textContent = `Bức thư gửi ${recipient} đã mở. Chúc em một ngày thật dịu dàng.`;
+        updateDays();
+        startPetals();
+
+        // Hai bạn cá camapp & cabeoo bật ra từ tâm phong bì sau khi thư mở
+        later(() => {
+          FishWorld.spawnFromEnvelope(origin);
+        }, 260 * speed);
+      }, reduced() ? 40 : 1180 * speed);
+    }
+
+    function replay() {
+      timers.forEach(clearTimeout);
+      timers.clear();
+      clearInterval(petalInterval);
+      petalInterval = null;
+      liveAnimations.forEach(a => a.cancel());
+      liveAnimations.clear();
+      particleLayer.replaceChildren();
+      FishWorld.stopAndClear();
+
+      state = "closed";
+      scene.classList.remove("is-opening", "is-open");
+      $("letter-layer").inert = true;
+      $("letter-layer").setAttribute("aria-hidden", "true");
+      $("intro").removeAttribute("aria-hidden");
+      $("letter-scroll").scrollTop = 0;
+      openButton.disabled = false;
+      openButton.setAttribute("aria-expanded", "false");
+      $("status").textContent = "Đang gấp lại thư để hoa nở thêm một lần nữa.";
+      seedlings();
+      openButton.focus({ preventScroll: true });
+      later(openLetter, reduced() ? 80 : 550 * speed);
+    }
+
+    openButton.addEventListener("click", openLetter);
+    $("replay").addEventListener("click", replay);
+
+    let lastTapTime = 0, lastTapX = 0, lastTapY = 0, lastFoodSpawnTime = 0;
+
+    scene.addEventListener("pointerdown", event => {
+      if (
+        event.target.closest("button, .letter-paper, .topbar, .fish-actor") ||
+        !event.isPrimary
+      ) {
+        return;
+      }
+
+      const now = performance.now();
+      const dist = Math.hypot(event.clientX - lastTapX, event.clientY - lastTapY);
+
+      if (state === "open" && now - lastTapTime < 340 && dist < 44) {
+        lastTapTime = 0;
+        lastFoodSpawnTime = now;
+        FishWorld.dropFood(event.clientX, event.clientY);
+        return;
+      }
+
+      lastTapTime = now;
+      lastTapX = event.clientX;
+      lastTapY = event.clientY;
+
+      for (let i = 0; i < (small() ? 4 : 6); i++) {
+        particle(i % 2 ? "petal" : "heart", event.clientX + rand(-15, 15), event.clientY + rand(-8, 8));
+      }
+    });
+
+    scene.addEventListener("dblclick", event => {
+      if (
+        state !== "open" ||
+        event.target.closest("button, .letter-paper, .topbar, .fish-actor")
+      ) {
+        return;
+      }
+      const now = performance.now();
+      if (now - lastFoodSpawnTime > 150) {
+        lastFoodSpawnTime = now;
+        FishWorld.dropFood(event.clientX, event.clientY);
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        FishWorld.updateBoundsCache();
+        if (state === "closed") seedlings();
+        else if (state === "open") bloomFlowers({ x: innerWidth / 2, y: innerHeight / 2 }, true);
+      }, 180);
+    });
+
+    motionQuery.addEventListener("change", () => {
+      liveAnimations.forEach(a => a.cancel());
+      liveAnimations.clear();
+      particleLayer.replaceChildren();
+      if (state !== "closed") bloomFlowers({ x: innerWidth / 2, y: innerHeight / 2 }, true);
+      startPetals();
+    });
+
+    /* ==========================================================
+       10. Nhạc opt-in: Web Audio tạo giai điệu riêng + âm báo tiến hóa
+       ========================================================== */
+    let audioContext, master, musicTimer, musicOn = false, musicBusy = false, media, melodyIndex = 0, toastTimer;
+    const activeVoices = new Set();
+    const musicButton = $("music");
+
+    function musicUI(on) {
+      musicOn = on;
+      musicButton.setAttribute("aria-pressed", String(on));
+      musicButton.setAttribute("aria-label", on ? "Tắt nhạc nền" : "Bật nhạc nền dịu dàng");
+      $("music-label").textContent = on ? "Nhạc đang bật" : "Nhạc đang tắt";
+    }
+
+    function toast(message) {
+      clearTimeout(toastTimer);
+      $("toast").textContent = message;
+      $("toast").classList.add("visible");
+      toastTimer = setTimeout(() => $("toast").classList.remove("visible"), 3300);
+    }
+
+    function note(frequency, time, volume = .1) {
+      const osc = audioContext.createOscillator(), gain = audioContext.createGain();
+      osc.type = "sine";
+      osc.frequency.value = frequency;
+      gain.gain.setValueAtTime(0, time);
+      gain.gain.linearRampToValueAtTime(volume, time + .025);
+      gain.gain.exponentialRampToValueAtTime(.0001, time + 2.6);
+      osc.connect(gain);
+      gain.connect(master);
+      activeVoices.add(osc);
+      osc.onended = () => { activeVoices.delete(osc); osc.disconnect(); gain.disconnect(); };
+      osc.start(time);
+      osc.stop(time + 2.7);
+    }
+
+    function playInteractiveChime(freq = 784, vol = 0.05) {
+      if (!musicOn || !audioContext || document.hidden) return;
+      try {
+        note(freq, audioContext.currentTime + 0.01, vol);
+      } catch (_) { }
+    }
+
+    // Chuỗi 4 nốt chuông cao vút mừng cá tiến hóa đeo vương miện
+    function playEvolutionFanfare() {
+      if (!musicOn || !audioContext || document.hidden) return;
+      try {
+        const base = audioContext.currentTime + 0.02;
+        [523.25, 659.25, 783.99, 1046.5].forEach((freq, idx) => {
+          note(freq, base + idx * 0.11, 0.065);
+        });
+      } catch (_) { }
+    }
+
+    function scheduleBar() {
+      if (!musicOn || document.hidden) return;
+      const melody = [523.25, 659.25, 783.99, 659.25, 587.33, 659.25, 523.25, 392];
+      const base = audioContext.currentTime + .08;
+      for (let i = 0; i < 4; i++) note(melody[(melodyIndex + i) % melody.length], base + i * .8, .09);
+      note(melodyIndex % 8 === 0 ? 130.81 : 174.61, base, .065);
+      note(melodyIndex % 8 === 0 ? 196 : 261.63, base + .06, .04);
+      melodyIndex = (melodyIndex + 4) % melody.length;
+    }
+
+    function stopVoices() {
+      clearInterval(musicTimer);
+      musicTimer = null;
+      activeVoices.forEach(osc => { try { osc.stop(); } catch { } });
+    }
+
+    async function toggleMusic() {
+      if (musicBusy) return;
+      if (musicOn) {
+        musicUI(false);
+        if (media) media.pause();
+        stopVoices();
+        return;
+      }
+      musicBusy = true;
+      try {
+        if (CONFIG.MUSIC_URL.trim()) {
+          if (!media) {
+            media = new Audio(CONFIG.MUSIC_URL);
+            media.loop = true;
+            media.volume = .25;
+            media.addEventListener("error", () => {
+              musicUI(false);
+              toast("Chưa tải được nhạc. Bạn kiểm tra lại MUSIC_URL nhé.");
+            });
+          }
+          await media.play();
+          musicUI(true);
+        } else {
+          const AudioEngine = window.AudioContext || window.webkitAudioContext;
+          if (!AudioEngine) throw new Error("Audio unavailable");
+          if (!audioContext) {
+            audioContext = new AudioEngine();
+            master = audioContext.createGain();
+            master.gain.value = .38;
+            master.connect(audioContext.destination);
+          }
+          await audioContext.resume();
+          musicUI(true);
+          scheduleBar();
+          musicTimer = setInterval(scheduleBar, 3200);
+        }
+      } catch {
+        musicUI(false);
+        toast("Chưa bật được nhạc. Chạm nút nhạc để thử lại nhé.");
+      } finally {
+        musicBusy = false;
+      }
+    }
+
+    musicButton.addEventListener("click", toggleMusic);
+
+    document.addEventListener("visibilitychange", () => {
+      scene.classList.toggle("is-paused", document.hidden);
+      liveAnimations.forEach(a => document.hidden ? a.pause() : a.play());
+      FishWorld.handleVisibilityChange();
+      if (document.hidden) {
+        clearInterval(petalInterval);
+        petalInterval = null;
+        stopVoices();
+        if (media) media.pause();
+      } else {
+        updateDays();
+        startPetals();
+        if (musicOn && media) media.play().catch(() => musicUI(false));
+        else if (musicOn && audioContext) {
+          scheduleBar();
+          musicTimer = setInterval(scheduleBar, 3200);
+        }
+      }
+    });
+
+    seedlings();
+    ambient();
+  </script>
+</body>
+
+</html>
