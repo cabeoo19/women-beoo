@@ -3228,6 +3228,7 @@ Yêu em thật nhìu!`,
        ========================================================== */
     function openLetter() {
       if (state !== "closed") return;
+      if (!musicOn) toggleMusic(); 
       state = "opening";
       const rect = openButton.getBoundingClientRect();
       const origin = { x: rect.left + rect.width / 2, y: rect.top + rect.height * .5 };
